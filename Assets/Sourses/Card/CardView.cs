@@ -7,13 +7,13 @@ public class CardView : MonoBehaviour
     [SerializeField] private DeckImages _deckImages;
     [SerializeField] private Sprite _downSprite;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    private float _movingSpeed=10f;
-    private Card _cardModel;
+    readonly private float _movingSpeed=10f;
+    private CardModel _cardModel;
     private Coroutine _moving;
 
-    public Card Card => _cardModel;
+    public CardModel Card => _cardModel;
     
-    public void Initialize(Card card)
+    public void Initialize(CardModel card)
     {
         _cardModel = card;
         _cardModel.SignToView(this);
@@ -33,7 +33,7 @@ public class CardView : MonoBehaviour
         }
     }
 
-    public void MoveToNewPlace(ICardPlaceView cardPlaceView)
+    public void MoveToNewPlace(CardPlaceView cardPlaceView)
     {
         if (_moving != null)
         {
@@ -43,10 +43,11 @@ public class CardView : MonoBehaviour
         _moving = StartCoroutine(MovingToPlace(cardPlaceView));
     }
 
-    private IEnumerator MovingToPlace(ICardPlaceView cardPlaceView)
+    private IEnumerator MovingToPlace(CardPlaceView cardPlaceView)
     {
-        Vector3 newPosition = cardPlaceView.NextCardPosition();
-        int count = 0;
+        Debug.Log(cardPlaceView == null);
+        Debug.Log(cardPlaceView.GetNextCardPosition());
+        Vector3 newPosition = cardPlaceView.GetNextCardPosition();
         
         while (Vector3.Distance(transform.position,newPosition)!>0.01f)
         {
@@ -54,6 +55,6 @@ public class CardView : MonoBehaviour
             yield return null;
         }
 
-        transform.SetParent(cardPlaceView as Transform);
+        transform.SetParent(cardPlaceView.transform);
     }
 }

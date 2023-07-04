@@ -9,11 +9,12 @@ public class Playground : MonoBehaviour
     [SerializeField] private DeckView _deckView;
     [SerializeField] private List<DumpView> _dumpsView;
     [SerializeField] private OpenedCardsView _openedCardsView;
+
     private const int _columnCount = 7;
-    private Deck _deck;
-    private List<Column> _columns;
-    private List<Card> _openedCard;
-    private List<Card> _dump;
+    private DeckModel _deck;
+    private List<ColumnModel> _columns;
+    private List<CardModel> _openedCard;
+    private List<CardModel> _dump;
 
     private Coroutine _waitingTime;
 
@@ -25,16 +26,16 @@ public class Playground : MonoBehaviour
 
     private void Initialize()
     {
-        _deck = new Deck(_deckView);
+        _deck = new DeckModel();
         _deckView.Initialize(_deck);
-        _openedCard = new List<Card>();
-        _dump = new List<Card>();
-        _columns = new List<Column>();
+        _openedCard = new List<CardModel>();
+        _dump = new List<CardModel>();
+        _columns = new List<ColumnModel>();
         
         for (int i = 0; i < _columnCount; i++)
         {
-            _columns.Add(new Column(_columnsView[i]));
-            _columnsView[i].Initialize(_columns[i],_cardTemplate);
+            _columns.Add(new ColumnModel());
+            _columnsView[i].Initialize(_columns[i]);
         }
     }
 
@@ -49,6 +50,7 @@ public class Playground : MonoBehaviour
         for (int i = 0; i < _columnCount; i++)
         {
             _columns[i].Fill(_deck,i+1);
+            _columns[i].OpenLastCard();
         }
     }
 
@@ -64,7 +66,7 @@ public class Playground : MonoBehaviour
 
     private IEnumerator WaitInitialization()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         SpreadOutCard();
     }
 }

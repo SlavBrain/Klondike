@@ -1,25 +1,49 @@
+using System;
 using System.Collections.Generic;
 
-public class CardPlaceModel
+public abstract class CardPlaceModel
 {
     private CardPlaceView _cardPlaceView;
-    private List<Card> _cards;
+    protected List<CardModel> _cards;
 
     public CardPlaceModel()
     {
-        _cards = new List<Card>();
+        _cards = new List<CardModel>();
     }
 
+    public event Action<CardPlaceModel,CardModel> GaveCard;
+
     public CardPlaceView View => _cardPlaceView;
-    public IReadOnlyList<Card> Card => _cards;
+
+    public IReadOnlyList<CardModel> Cards => _cards;
 
     public void SignToView(CardPlaceView cardPlaceView)
     {
         _cardPlaceView = cardPlaceView;
     }
-    
-    private void AddCard(Card newCard)
+
+    public bool TryGiveTopCard(CardPlaceModel cardPlaceModel)
     {
-        _cards.Add(newCard);
+        if (_cards.Count > 0)
+        {
+            GiveTopCard(cardPlaceModel);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
+
+    private void GiveTopCard(CardPlaceModel cardPlaceModel)
+    {
+        CardModel card = _cards[0];
+        _cards.RemoveAt(0);
+        GaveCard?.Invoke(cardPlaceModel,card);
+    }
+
+    private void RequestCard(CardPlaceModel cardPlaceModel)
+    {
+        cardPlaceModel.TryGiveTopCard(this);
+    }    
 }
