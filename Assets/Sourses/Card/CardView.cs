@@ -1,13 +1,14 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CardView : MonoBehaviour
+public class CardView : MonoBehaviour,IDragHandler
 {
     [SerializeField] private DeckImages _deckImages;
     [SerializeField] private Sprite _downSprite;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    readonly private float _movingSpeed=10f;
+    readonly private float _movingSpeed=30f;
+    private Vector2 _lastMousePosition;
     private CardModel _cardModel;
     private Coroutine _moving;
 
@@ -45,9 +46,9 @@ public class CardView : MonoBehaviour
 
     private IEnumerator MovingToPlace(CardPlaceView cardPlaceView)
     {
-        Debug.Log(cardPlaceView == null);
-        Debug.Log(cardPlaceView.GetNextCardPosition());
         Vector3 newPosition = cardPlaceView.GetNextCardPosition();
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, newPosition.z);
         
         while (Vector3.Distance(transform.position,newPosition)!>0.01f)
         {
@@ -56,5 +57,9 @@ public class CardView : MonoBehaviour
         }
 
         transform.SetParent(cardPlaceView.transform);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
     }
 }

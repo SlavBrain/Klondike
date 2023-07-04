@@ -13,7 +13,7 @@ public class Playground : MonoBehaviour
     private const int _columnCount = 7;
     private DeckModel _deck;
     private List<ColumnModel> _columns;
-    private List<CardModel> _openedCard;
+    private OpenedCardModel _openedCardModel;
     private List<CardModel> _dump;
 
     private Coroutine _waitingTime;
@@ -28,7 +28,8 @@ public class Playground : MonoBehaviour
     {
         _deck = new DeckModel();
         _deckView.Initialize(_deck);
-        _openedCard = new List<CardModel>();
+        _openedCardModel = new OpenedCardModel();
+        _openedCardsView.Initialize(_openedCardModel);
         _dump = new List<CardModel>();
         _columns = new List<ColumnModel>();
         

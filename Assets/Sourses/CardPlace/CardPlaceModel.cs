@@ -20,6 +20,7 @@ public abstract class CardPlaceModel
     public void SignToView(CardPlaceView cardPlaceView)
     {
         _cardPlaceView = cardPlaceView;
+        _cardPlaceView.TakedCard += TakeCard;
     }
 
     public bool TryGiveTopCard(CardPlaceModel cardPlaceModel)
@@ -40,6 +41,11 @@ public abstract class CardPlaceModel
         CardModel card = _cards[0];
         _cards.RemoveAt(0);
         GaveCard?.Invoke(cardPlaceModel,card);
+    }
+
+    private void TakeCard(CardView cardView)
+    {
+       _cards.Add(cardView.Card); 
     }
 
     private void RequestCard(CardPlaceModel cardPlaceModel)

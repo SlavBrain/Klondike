@@ -8,6 +8,8 @@ public abstract class CardPlaceView : MonoBehaviour
     protected CardPlaceModel _cardPlaceModel;
     private bool _isSignedToModel;
 
+    public CardPlaceModel Model => _cardPlaceModel;
+
     public event Action<CardView> TakedCard;
 
     private void OnEnable()
@@ -36,7 +38,7 @@ public abstract class CardPlaceView : MonoBehaviour
         return transform.position;
     }
 
-    public void TakeCard(CardView cardView)
+    public virtual void TakeCard(CardView cardView)
     {
         _cards.Add(cardView);
         TakedCard?.Invoke(cardView);

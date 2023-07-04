@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenedCardsView : MonoBehaviour
+public class OpenedCardsView : CardPlaceView
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    private Vector3 _offset = new(0, 0, -0.1f);
         
+        
+    public override Vector3 GetNextCardPosition()
+    {
+        return transform.position + _offset * _cards.Count;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void TakeCard(CardView cardView)
     {
-        
+        cardView.Card.Open();
+        base.TakeCard(cardView);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class ColumnModel: CardPlaceModel
 {
@@ -17,8 +18,10 @@ public class ColumnModel: CardPlaceModel
 
     public void OpenLastCard()
     {
+        Debug.Log(_cards.Count);
         if (_cards.Count > 0)
         {
+            Debug.Log("tryOpen");
             _cards[_cards.Count - 1].Open();
         }
     }
