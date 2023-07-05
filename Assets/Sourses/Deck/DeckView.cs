@@ -5,11 +5,19 @@ public class DeckView : CardPlaceView
 {
     [SerializeField] private CardView _cardTemplate;
     [SerializeField] private OpenedCardsView _openedCardsView;
-    private Vector3 _offset = new(0, 0, 0.5f);
+    private Vector3 _offset = new(0, 0, -0.1f);
 
     public void OnOpenCardButtonClick()
     {
-        _cardPlaceModel.TryGiveTopCard(_openedCardsView.Model);
+        if (_cards.Count > 0)
+        {
+            _cardPlaceModel.TryGiveTopCard(_openedCardsView.Model);
+        }
+        else
+        {
+            DeckModel deckModel = _cardPlaceModel as DeckModel;
+            deckModel.TakeAllCard(_openedCardsView.Model as OpenedCardModel);
+        }        
     }
     
     protected override void SignToModelAction()

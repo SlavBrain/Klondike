@@ -7,8 +7,11 @@ public class CardModel
     readonly private CardRangs _rang;
     readonly private CardSuits _suit;
     private bool _isOpen=false;
+    private bool _isDraggingAllow = false;
+    private bool _isOpeningAllow = false;
 
     public event Action ChangedOpenState;
+    public event Action AllowedDragging;
     
     public CardModel(CardRangs rang, CardSuits suit)
     {
@@ -37,5 +40,6 @@ public class CardModel
     {
         _isOpen = false;
         ChangedOpenState?.Invoke();
+        AllowedDragging?.Invoke();
     }
 }

@@ -1,14 +1,14 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class CardView : MonoBehaviour,IDragHandler
+public class CardView : MonoBehaviour
 {
     [SerializeField] private DeckImages _deckImages;
     [SerializeField] private Sprite _downSprite;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private DragableObject _dragableObject;
+
     readonly private float _movingSpeed=30f;
-    private Vector2 _lastMousePosition;
     private CardModel _cardModel;
     private Coroutine _moving;
 
@@ -20,6 +20,7 @@ public class CardView : MonoBehaviour,IDragHandler
         _cardModel.SignToView(this);
         Refresh();
         _cardModel.ChangedOpenState += Refresh;
+        _cardModel.ChangedOpenState += OnDraggingAllowed;
     }
 
     private void Refresh()
@@ -59,7 +60,9 @@ public class CardView : MonoBehaviour,IDragHandler
         transform.SetParent(cardPlaceView.transform);
     }
 
-    public void OnDrag(PointerEventData eventData)
+    private void OnDraggingAllowed()
     {
+        Debug.Log("dragging");
+        _dragableObject.enabled = true;
     }
 }

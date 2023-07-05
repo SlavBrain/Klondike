@@ -25,6 +25,14 @@ public class DeckModel: CardPlaceModel
         OverrideStartState();
     }
 
+    public void TakeAllCard(OpenedCardModel openedCardsModel)
+    {
+        for(int i=openedCardsModel.Cards.Count;i>=0; i--)
+        {
+            openedCardsModel.TryGiveTopCard(this);
+        }        
+    }
+
     private void Shuffle()
     {
         Random random = new();

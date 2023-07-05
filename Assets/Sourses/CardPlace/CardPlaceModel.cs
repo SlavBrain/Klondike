@@ -38,8 +38,8 @@ public abstract class CardPlaceModel
 
     private void GiveTopCard(CardPlaceModel cardPlaceModel)
     {
-        CardModel card = _cards[0];
-        _cards.RemoveAt(0);
+        CardModel card = _cards[_cards.Count-1];
+        _cards.RemoveAt(_cards.Count - 1);
         GaveCard?.Invoke(cardPlaceModel,card);
     }
 
