@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7204143047486254575}
   - component: {fileID: 7204143047486254568}
   - component: {fileID: 7204143047486254569}
-  - component: {fileID: 6171666641962636733}
   - component: {fileID: 2127230834071588732}
+  - component: {fileID: 6171666641962636733}
   m_Layer: 0
   m_Name: CardTemplate
   m_TagString: Untagged
@@ -103,6 +103,19 @@ MonoBehaviour:
   _downSprite: {fileID: -2021641553, guid: 31c5676c2272583488b59881d6e7ce91, type: 3}
   _spriteRenderer: {fileID: 7204143047486254568}
   _dragableObject: {fileID: 2127230834071588732}
+--- !u!114 &2127230834071588732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7204143047486254570}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6262c55c4ad1d0d439748ff6ab1ab014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 6171666641962636733}
 --- !u!61 &6171666641962636733
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -129,15 +142,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2127230834071588732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7204143047486254570}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6262c55c4ad1d0d439748ff6ab1ab014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

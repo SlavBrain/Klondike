@@ -43,7 +43,7 @@ public abstract class CardPlaceModel
         GaveCard?.Invoke(cardPlaceModel,card);
     }
 
-    private void TakeCard(CardView cardView)
+    protected virtual void TakeCard(CardView cardView)
     {
        _cards.Add(cardView.Card); 
     }

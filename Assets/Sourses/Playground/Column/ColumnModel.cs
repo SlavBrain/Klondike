@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ColumnModel: CardPlaceModel
 {
-    public event Action<CardModel> CardAdded;
-
     public void Fill(DeckModel deck,int startCardCount)
     {
         for (int i = 0; i < startCardCount; i++)

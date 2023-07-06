@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardModel
@@ -7,11 +8,11 @@ public class CardModel
     readonly private CardRangs _rang;
     readonly private CardSuits _suit;
     private bool _isOpen=false;
-    private bool _isDraggingAllow = false;
-    private bool _isOpeningAllow = false;
+    private bool _isDraggingPermission = false;
+    private bool _isOpeningPermission = false;
 
     public event Action ChangedOpenState;
-    public event Action AllowedDragging;
+    public event Action ChangedPermissionDragging;
     
     public CardModel(CardRangs rang, CardSuits suit)
     {
@@ -23,6 +24,9 @@ public class CardModel
     public CardRangs Rang => _rang;
     public CardSuits Suit => _suit;
     public bool IsOpen => _isOpen;
+    public bool IsOpeningPermission => _isOpeningPermission;
+    public bool IsDraggingPermission => _isDraggingPermission;
+    
 
     public void SignToView(CardView cardView)
     {
@@ -31,15 +35,17 @@ public class CardModel
 
     public void Open()
     {
-        Debug.Log("Open");
         _isOpen = true;
+        _isDraggingPermission = true;
         ChangedOpenState?.Invoke();
+        ChangedPermissionDragging?.Invoke();
     }
 
     public void Close()
     {
         _isOpen = false;
+        _isDraggingPermission = false;
         ChangedOpenState?.Invoke();
-        AllowedDragging?.Invoke();
+        ChangedPermissionDragging?.Invoke();
     }
 }

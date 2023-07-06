@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Random = System.Random;
 
 public class DeckModel: CardPlaceModel
@@ -30,7 +31,15 @@ public class DeckModel: CardPlaceModel
         for(int i=openedCardsModel.Cards.Count;i>=0; i--)
         {
             openedCardsModel.TryGiveTopCard(this);
+            
         }        
+    }
+
+    protected override void TakeCard(CardView cardView)
+    {
+        Debug.Log("closed");
+        base.TakeCard(cardView);
+        cardView.Card.Close();
     }
 
     private void Shuffle()

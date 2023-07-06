@@ -20,7 +20,7 @@ public class CardView : MonoBehaviour
         _cardModel.SignToView(this);
         Refresh();
         _cardModel.ChangedOpenState += Refresh;
-        _cardModel.ChangedOpenState += OnDraggingAllowed;
+        _cardModel.ChangedPermissionDragging += OnChangedDraggingPermission;
     }
 
     private void Refresh()
@@ -60,9 +60,9 @@ public class CardView : MonoBehaviour
         transform.SetParent(cardPlaceView.transform);
     }
 
-    private void OnDraggingAllowed()
+    private void OnChangedDraggingPermission()
     {
-        Debug.Log("dragging");
-        _dragableObject.enabled = true;
+        Debug.Log(_cardModel.IsDraggingPermission);
+        _dragableObject.enabled = _cardModel.IsDraggingPermission;
     }
 }
