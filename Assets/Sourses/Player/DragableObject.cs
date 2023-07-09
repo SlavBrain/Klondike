@@ -1,8 +1,5 @@
-using System;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DragableObject : MonoBehaviour
 {
@@ -11,6 +8,8 @@ public class DragableObject : MonoBehaviour
     private Vector3 _startPosition;
     private Collider2D[] _nearColliders;
     private float _triggerRadius = 0.55f;
+    private CardPlaceView _parentCardPlace;
+    
     private void Update()
     {
         if (_isDragging)
@@ -38,29 +37,40 @@ public class DragableObject : MonoBehaviour
 
     private void SetPosition()
     {
-        IsObjectInNewPlace();
+        if (IsObjectInNewPlace(out CardPlaceView cardPlaceView))
+        {
+            if(!cardPlaceView.Model.TryTakeDraggingCard(this.GetComponent<CardView>().Card))
+                TeleportToStartPosition();
+        }
+        else
+        {
+            TeleportToStartPosition();
+        }
+    }
+
+    private void TeleportToStartPosition()
+    {
         transform.position = _startPosition;
     }
-
-    private bool IsObjectInNewPlace()
+    
+    private bool IsObjectInNewPlace(out CardPlaceView nearestCardPlaceView)
     {
+        nearestCardPlaceView = null;
         _nearColliders = Physics2D.OverlapCircleAll(transform.position, _triggerRadius);
-        var nearestCardPlace = _nearColliders
+        _parentCardPlace = GetComponentInParent<CardPlaceView>();
+        _parentCardPlace.TryGetComponent<Collider2D>(out Collider2D parentCollider);
+        
+        var nearestCardPlaceCollider = _nearColliders
             .OrderBy(collider => Vector2.Distance(transform.position, collider.transform.position))
-            .Where(collider => collider.TryGetComponent<CardPlaceView>(out CardPlaceView cardPlaceView))
-            //.Except(this.GetComponentInParent<Collider2D>())
-            .ToList();
-            
-        Debug.Log(_nearColliders.Length+"  "+nearestCardPlace.Count);
-        return true;
+            .Except(new Collider2D[] { parentCollider})
+            .FirstOrDefault(collider => collider.TryGetComponent<CardPlaceView>(out CardPlaceView nearestCardPlaceView));
+
+        if (nearestCardPlaceCollider != null)
+        {
+            Debug.Log(nearestCardPlaceCollider.gameObject.name);
+            nearestCardPlaceView = nearestCardPlaceCollider.GetComponent<CardPlaceView>();
+        }
+        
+        return nearestCardPlaceView!=null;
     }
 }
-
-/*
-var nearestUnitCollider = nearUnits
-    .OrderBy(collider => Vector3.Distance(transform.position, collider.transform.position))
-    .Where(collider => collider.TryGetComponent(out Unit nearUnits)).ToList()
-    .Except(new Collider[] { this.GetComponent<Collider>() }).ToList()
-    .Where(unit => (unit.GetComponent<Unit>().Weapon.Id == _weapon.Id) && (unit.GetComponent<Unit>().Level == _level)).ToList()
-    .FirstOrDefault();
-    */

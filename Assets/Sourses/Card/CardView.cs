@@ -62,7 +62,6 @@ public class CardView : MonoBehaviour
 
     private void OnChangedDraggingPermission()
     {
-        Debug.Log(_cardModel.IsDraggingPermission);
         _dragableObject.enabled = _cardModel.IsDraggingPermission;
     }
 }

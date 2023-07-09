@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DumpView : MonoBehaviour
+public class DumpView : CardPlaceView
 {
-    // Start is called before the first frame update
-    void Start()
+    private Vector3 _offset = new(0, 0,-0.1f);
+    
+    public override Vector3 GetNextCardPosition()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return transform.position + _offset * _cards.Count;
     }
 }

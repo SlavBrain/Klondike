@@ -64,7 +64,6 @@ public abstract class CardPlaceView : MonoBehaviour
 
     private void GiveCardView(CardPlaceModel cardPlaceModel, CardModel cardModel)
     {
-
         cardModel.View.MoveToNewPlace(cardPlaceModel.View);
         cardPlaceModel.View.TakeCard(cardModel.View);
         _cards.Remove(cardModel.View);

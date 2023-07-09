@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class CardPlaceModel
 {
     private CardPlaceView _cardPlaceView;
     protected List<CardModel> _cards;
 
-    public CardPlaceModel()
+    protected CardPlaceModel()
     {
         _cards = new List<CardModel>();
     }
@@ -36,11 +37,27 @@ public abstract class CardPlaceModel
         }
     }
 
+    public void GiveCards(CardPlaceModel cardPlaceModel,CardModel cardModel)
+    {
+        int cardPosition = _cards.FindIndex(card=>card==cardModel);
+        Debug.Log("CardPosition "+cardPosition);
+        
+        while(_cards.Count>cardPosition)
+        {
+            Debug.Log("GiveCard:"+_cards[cardPosition].Rang+" "+_cards[cardPosition].Suit);
+            GiveCard(cardPlaceModel,_cards[cardPosition]);
+        }
+    }
+
     private void GiveTopCard(CardPlaceModel cardPlaceModel)
     {
-        CardModel card = _cards[_cards.Count-1];
-        _cards.RemoveAt(_cards.Count - 1);
-        GaveCard?.Invoke(cardPlaceModel,card);
+        GiveCard(cardPlaceModel,_cards[_cards.Count-1]);
+    }
+
+    protected virtual void GiveCard(CardPlaceModel cardPlaceModel, CardModel cardModel)
+    {
+        _cards.Remove(cardModel);
+        GaveCard?.Invoke(cardPlaceModel,cardModel);
     }
 
     protected virtual void TakeCard(CardView cardView)
@@ -48,8 +65,18 @@ public abstract class CardPlaceModel
        _cards.Add(cardView.Card); 
     }
 
-    private void RequestCard(CardPlaceModel cardPlaceModel)
+    public virtual bool TryTakeDraggingCard(CardModel cardModel)
     {
-        cardPlaceModel.TryGiveTopCard(this);
-    }    
+        return false;
+    }
+
+    protected virtual bool IsCardCanBeAdded(CardModel cardModel)
+    {
+        return false;
+    }
+
+    protected void RequiredCard(CardPlaceModel cardPlaceModel,CardModel cardModel)
+    {
+        cardPlaceModel.GiveCards(this,cardModel);
+    }
 }

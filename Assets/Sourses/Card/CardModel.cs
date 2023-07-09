@@ -26,7 +26,8 @@ public class CardModel
     public bool IsOpen => _isOpen;
     public bool IsOpeningPermission => _isOpeningPermission;
     public bool IsDraggingPermission => _isDraggingPermission;
-    
+
+    public bool IsBlack=> _suit == CardSuits.Clubs || _suit == CardSuits.Spades;
 
     public void SignToView(CardView cardView)
     {

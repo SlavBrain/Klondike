@@ -11,10 +11,11 @@ public class Playground : MonoBehaviour
     [SerializeField] private OpenedCardsView _openedCardsView;
 
     private const int _columnCount = 7;
+    private const int _dumpCount = 4;
     private DeckModel _deck;
     private List<ColumnModel> _columns;
     private OpenedCardModel _openedCardModel;
-    private List<CardModel> _dump;
+    private List<DumpModel> _dumps;
 
     private Coroutine _waitingTime;
 
@@ -30,13 +31,20 @@ public class Playground : MonoBehaviour
         _deckView.Initialize(_deck);
         _openedCardModel = new OpenedCardModel();
         _openedCardsView.Initialize(_openedCardModel);
-        _dump = new List<CardModel>();
+        _dumps = new List<DumpModel>();
+        
         _columns = new List<ColumnModel>();
         
         for (int i = 0; i < _columnCount; i++)
         {
             _columns.Add(new ColumnModel());
             _columnsView[i].Initialize(_columns[i]);
+        }
+
+        for (int i = 0; i < _dumpCount; i++)
+        {
+            _dumps.Add(new DumpModel());
+            _dumpsView[i].Initialize(_dumps[i]);
         }
     }
 
