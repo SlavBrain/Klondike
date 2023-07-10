@@ -26,11 +26,11 @@ public class DeckModel: CardPlaceModel
         OverrideStartState();
     }
 
-    public void TakeAllCard(OpenedCardModel openedCardsModel)
+    public void TakeAllCard(OpenedCardsModel openedCardsesModel)
     {
-        for(int i=openedCardsModel.Cards.Count;i>=0; i--)
+        for(int i=openedCardsesModel.Cards.Count;i>=0; i--)
         {
-            openedCardsModel.TryGiveTopCard(this);
+            openedCardsesModel.TryGiveTopCard(this);
             
         }        
     }

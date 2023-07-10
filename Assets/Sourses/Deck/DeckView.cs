@@ -17,7 +17,7 @@ public class DeckView : CardPlaceView
         else
         {
             DeckModel deckModel = _cardPlaceModel as DeckModel;
-            deckModel.TakeAllCard(_openedCardsView.Model as OpenedCardModel);
+            deckModel.TakeAllCard(_openedCardsView.Model as OpenedCardsModel);
         }        
     }
     
