@@ -31,6 +31,7 @@ public class EntryPoint : MonoBehaviour
         InitializePlayground();
         
         BindButtons();
+        BindEventActions();
     }
 
     private void InitializeDeck()
@@ -69,11 +70,27 @@ public class EntryPoint : MonoBehaviour
 
     private void InitializePlayground()
     {
-        _playground.Initialize(_deckModel,_columnModels,_startButton);
+        _playground.Initialize(_deckModel,_columnModels,_startButton,_restartButton);
     }
 
     private void BindButtons()
     {
         _startButton.onClick.AddListener(_playground.StartGame);
+    }
+
+    private void BindEventActions()
+    {
+        _playground.StartingGame += _deckModel.Reset;
+        _playground.StartingGame += _openedCardsModel.Reset;
+
+        foreach(ColumnModel column in _columnModels)
+        {
+            _playground.StartingGame += column.Reset;
+        }
+
+        foreach(DumpModel dump in _dumpModels)
+        {
+            _playground.StartingGame += dump.Reset;
+        }
     }
 }

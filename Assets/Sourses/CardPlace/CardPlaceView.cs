@@ -49,6 +49,7 @@ public abstract class CardPlaceView : MonoBehaviour
         if (_cardPlaceModel != null)
         {
             _cardPlaceModel.GaveCard += GiveCardView;
+            _cardPlaceModel.Reseted += OnModelReset;
             _isSignedToModel = true;
         }
     }
@@ -58,6 +59,7 @@ public abstract class CardPlaceView : MonoBehaviour
         if (_cardPlaceModel != null)
         {
             _cardPlaceModel.GaveCard -= GiveCardView;
+            _cardPlaceModel.Reseted -= OnModelReset;
             _isSignedToModel = false;
         }
     }
@@ -67,5 +69,15 @@ public abstract class CardPlaceView : MonoBehaviour
         cardModel.View.MoveToNewPlace(cardPlaceModel.View);
         cardPlaceModel.View.TakeCard(cardModel.View);
         _cards.Remove(cardModel.View);
+    }
+
+    private void OnModelReset()
+    {
+        foreach(CardView card in _cards)
+        {
+            Destroy(card.gameObject);
+        }
+
+        _cards.Clear();
     }
 }

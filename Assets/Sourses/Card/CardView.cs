@@ -13,7 +13,13 @@ public class CardView : MonoBehaviour
     private Coroutine _moving;
 
     public CardModel Card => _cardModel;
-    
+
+    public void OnDestroy()
+    {
+        _cardModel.ChangedOpenState -= Refresh;
+        _cardModel.ChangedPermissionDragging -= OnChangedDraggingPermission;
+    }
+
     public void Initialize(CardModel card)
     {
         _cardModel = card;

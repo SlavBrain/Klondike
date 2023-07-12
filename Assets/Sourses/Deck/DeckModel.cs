@@ -17,13 +17,21 @@ public class DeckModel: CardPlaceModel
             foreach (CardRangs rang in Enum.GetValues(typeof(CardRangs)))
             {
                 CardModel newCard = new(rang, suit);
-                _cards.Add(newCard);
-                CreatedNewCard?.Invoke(newCard);
+                CreateNewCard(newCard);
             }
         }
 
         Shuffle();
         OverrideStartState();
+    }
+
+    public void Recover()
+    {
+        Reset();
+        foreach( CardModel card in _startingCards) 
+        {
+            CreateNewCard(card);
+        }
     }
 
     public void TakeAllCard(OpenedCardsModel openedCardsesModel)
@@ -37,7 +45,6 @@ public class DeckModel: CardPlaceModel
 
     protected override void TakeCard(CardView cardView)
     {
-        Debug.Log("closed");
         base.TakeCard(cardView);
         cardView.Card.Close();
     }
@@ -61,5 +68,11 @@ public class DeckModel: CardPlaceModel
         {
             _startingCards.Add(card);
         }
+    }
+
+    private void CreateNewCard(CardModel card)
+    {
+        _cards.Add(card);
+        CreatedNewCard?.Invoke(card);
     }
 }

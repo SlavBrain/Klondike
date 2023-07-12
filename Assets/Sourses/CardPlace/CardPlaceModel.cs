@@ -13,6 +13,7 @@ public abstract class CardPlaceModel
     }
 
     public event Action<CardPlaceModel,CardModel> GaveCard;
+    public event Action Reseted;
 
     public CardPlaceView View => _cardPlaceView;
 
@@ -22,6 +23,12 @@ public abstract class CardPlaceModel
     {
         _cardPlaceView = cardPlaceView;
         _cardPlaceView.TakedCard += TakeCard;
+    }
+
+    public void Reset()
+    {
+        _cards = new List<CardModel>();
+        Reseted?.Invoke();
     }
 
     public bool TryGiveTopCard(CardPlaceModel cardPlaceModel)
@@ -40,11 +47,9 @@ public abstract class CardPlaceModel
     public void GiveCards(CardPlaceModel cardPlaceModel,CardModel cardModel)
     {
         int cardPosition = _cards.FindIndex(card=>card==cardModel);
-        Debug.Log("CardPosition "+cardPosition);
         
         while(_cards.Count>cardPosition)
         {
-            Debug.Log("GiveCard:"+_cards[cardPosition].Rang+" "+_cards[cardPosition].Suit);
             GiveCard(cardPlaceModel,_cards[cardPosition]);
         }
     }
@@ -78,5 +83,5 @@ public abstract class CardPlaceModel
     protected void RequiredCard(CardPlaceModel cardPlaceModel,CardModel cardModel)
     {
         cardPlaceModel.GiveCards(this,cardModel);
-    }
+    }   
 }
