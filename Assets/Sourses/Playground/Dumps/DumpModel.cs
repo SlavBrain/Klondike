@@ -15,24 +15,11 @@ public class DumpModel : CardPlaceModel
             return cardModel.Suit == _currentSuit && cardModel.Rang == _cards[_cards.Count - 1].Rang + 1;
         }
     }
-    
-    public override bool TryTakeDraggingCard(CardModel cardModel)
-    {
-        if (IsCardCanBeAdded(cardModel))
-        {
-            RequiredCard(cardModel.View.GetComponentInParent<CardPlaceView>().Model, cardModel);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 
-    protected override void TakeCard(CardView cardView)
+    public override void TakeCard(CardModel card)
     {
-        base.TakeCard(cardView);
-        SetSuit(cardView.Card.Suit);
+        base.TakeCard(card);
+        SetSuit(card.Suit);
     }
 
     private void SetSuit(CardSuits suit)

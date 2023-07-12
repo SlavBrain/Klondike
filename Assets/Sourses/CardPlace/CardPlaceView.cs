@@ -10,8 +10,6 @@ public abstract class CardPlaceView : MonoBehaviour
 
     public CardPlaceModel Model => _cardPlaceModel;
 
-    public event Action<CardView> TakedCard;
-
     private void OnEnable()
     {
         if (!_isSignedToModel)
@@ -38,17 +36,12 @@ public abstract class CardPlaceView : MonoBehaviour
         return transform.position;
     }
 
-    public virtual void TakeCard(CardView cardView)
-    {
-        _cards.Add(cardView);
-        TakedCard?.Invoke(cardView);
-    }
-
     protected virtual void SignToModelAction()
     {
         if (_cardPlaceModel != null)
         {
-            _cardPlaceModel.GaveCard += GiveCardView;
+            _cardPlaceModel.TakedCard += OnTakedCard;
+            _cardPlaceModel.GaveCard += OnGiveCard;
             _cardPlaceModel.Reseted += OnModelReset;
             _isSignedToModel = true;
         }
@@ -58,16 +51,21 @@ public abstract class CardPlaceView : MonoBehaviour
     {
         if (_cardPlaceModel != null)
         {
-            _cardPlaceModel.GaveCard -= GiveCardView;
+            _cardPlaceModel.GaveCard -= OnGiveCard;
             _cardPlaceModel.Reseted -= OnModelReset;
             _isSignedToModel = false;
         }
     }
 
-    private void GiveCardView(CardPlaceModel cardPlaceModel, CardModel cardModel)
+    protected virtual void OnTakedCard(CardModel card)
+    {
+        _cards.Add(card.View);
+    }
+
+    private void OnGiveCard(CardPlaceModel cardPlaceModel, CardModel cardModel)
     {
         cardModel.View.MoveToNewPlace(cardPlaceModel.View);
-        cardPlaceModel.View.TakeCard(cardModel.View);
+        cardPlaceModel.TakeCard(cardModel);
         _cards.Remove(cardModel.View);
     }
 

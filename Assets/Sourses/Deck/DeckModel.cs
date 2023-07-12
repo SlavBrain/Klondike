@@ -30,6 +30,7 @@ public class DeckModel: CardPlaceModel
         Reset();
         foreach( CardModel card in _startingCards) 
         {
+            card.Close();
             CreateNewCard(card);
         }
     }
@@ -43,10 +44,10 @@ public class DeckModel: CardPlaceModel
         }        
     }
 
-    protected override void TakeCard(CardView cardView)
+    public override void TakeCard(CardModel card)
     {
-        base.TakeCard(cardView);
-        cardView.Card.Close();
+        base.TakeCard(card);
+        card.Close();
     }
 
     private void Shuffle()

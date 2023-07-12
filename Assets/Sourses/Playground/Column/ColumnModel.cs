@@ -21,19 +21,6 @@ public class ColumnModel: CardPlaceModel
         }
     }
 
-    public override bool TryTakeDraggingCard(CardModel cardModel)
-    {
-        if (IsCardCanBeAdded(cardModel))
-        {
-            RequiredCard(cardModel.View.GetComponentInParent<CardPlaceView>().Model, cardModel);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     protected override bool IsCardCanBeAdded(CardModel cardModel)
     {
         if (_cards.Count == 0)
@@ -43,8 +30,6 @@ public class ColumnModel: CardPlaceModel
         else
         {
             CardModel lastCard = _cards[_cards.Count - 1];
-            Debug.Log("Color"+(lastCard.IsBlack != cardModel.IsBlack));
-            Debug.Log("Rang"+(lastCard.Rang == cardModel.Rang + 1));
             return (lastCard.IsBlack != cardModel.IsBlack) && (lastCard.Rang == cardModel.Rang + 1);
         }
     }

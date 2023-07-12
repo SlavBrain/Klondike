@@ -39,7 +39,7 @@ public class DragableObject : MonoBehaviour
     {
         if (IsObjectInNewPlace(out CardPlaceView cardPlaceView))
         {
-            if(!cardPlaceView.Model.TryTakeDraggingCard(this.GetComponent<CardView>().Card))
+            if(!cardPlaceView.Model.TryTakeCard(this.GetComponent<CardView>().Card))
                 TeleportToStartPosition();
         }
         else

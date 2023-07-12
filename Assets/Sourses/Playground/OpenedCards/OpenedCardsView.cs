@@ -10,9 +10,9 @@ public class OpenedCardsView : CardPlaceView
         return transform.position + _offset * _cards.Count;
     }
 
-    public override void TakeCard(CardView cardView)
+    protected override void OnTakedCard(CardModel card)
     {
-        cardView.Card.Open();
-        base.TakeCard(cardView);
+        card.Open();
+        base.OnTakedCard(card);
     }
 }

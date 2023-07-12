@@ -13,6 +13,7 @@ public abstract class CardPlaceModel
     }
 
     public event Action<CardPlaceModel,CardModel> GaveCard;
+    public event Action<CardModel> TakedCard;
     public event Action Reseted;
 
     public CardPlaceView View => _cardPlaceView;
@@ -22,7 +23,7 @@ public abstract class CardPlaceModel
     public void SignToView(CardPlaceView cardPlaceView)
     {
         _cardPlaceView = cardPlaceView;
-        _cardPlaceView.TakedCard += TakeCard;
+        //_cardPlaceView.TakedCard += TakeCard;
     }
 
     public void Reset()
@@ -35,7 +36,7 @@ public abstract class CardPlaceModel
     {
         if (_cards.Count > 0)
         {
-            GiveTopCard(cardPlaceModel);
+            GiveCard(cardPlaceModel,_cards[^1]);
             return true;
         }
         else
@@ -54,26 +55,30 @@ public abstract class CardPlaceModel
         }
     }
 
-    private void GiveTopCard(CardPlaceModel cardPlaceModel)
+    public bool TryTakeCard(CardModel cardModel)
     {
-        GiveCard(cardPlaceModel,_cards[_cards.Count-1]);
+        if (IsCardCanBeAdded(cardModel))
+        {
+            RequiredCard(cardModel.View.GetComponentInParent<CardPlaceView>().Model, cardModel);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public virtual void TakeCard(CardModel card)
+    {
+        _cards.Add(card);
+        TakedCard?.Invoke(card);
     }
 
     protected virtual void GiveCard(CardPlaceModel cardPlaceModel, CardModel cardModel)
     {
         _cards.Remove(cardModel);
         GaveCard?.Invoke(cardPlaceModel,cardModel);
-    }
-
-    protected virtual void TakeCard(CardView cardView)
-    {
-       _cards.Add(cardView.Card); 
-    }
-
-    public virtual bool TryTakeDraggingCard(CardModel cardModel)
-    {
-        return false;
-    }
+    }    
 
     protected virtual bool IsCardCanBeAdded(CardModel cardModel)
     {
@@ -83,5 +88,5 @@ public abstract class CardPlaceModel
     protected void RequiredCard(CardPlaceModel cardPlaceModel,CardModel cardModel)
     {
         cardPlaceModel.GiveCards(this,cardModel);
-    }   
+    }
 }
