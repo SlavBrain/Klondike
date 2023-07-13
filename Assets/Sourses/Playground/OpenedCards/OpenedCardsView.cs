@@ -12,7 +12,7 @@ public class OpenedCardsView : CardPlaceView
 
     protected override void OnTakedCard(CardModel card)
     {
-        card.Open();
+        card.OpenMove();
         base.OnTakedCard(card);
     }
 }

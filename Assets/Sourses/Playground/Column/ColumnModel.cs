@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class ColumnModel: CardPlaceModel
 {
     public void Fill(DeckModel deck,int startCardCount)
@@ -17,7 +15,7 @@ public class ColumnModel: CardPlaceModel
     {
         if (_cards.Count > 0)
         {
-            _cards[_cards.Count - 1].Open();
+            _cards[^1].OpenMove();
         }
     }
 
@@ -29,14 +27,14 @@ public class ColumnModel: CardPlaceModel
         }
         else
         {
-            CardModel lastCard = _cards[_cards.Count - 1];
+            CardModel lastCard = _cards[^1];
             return (lastCard.IsBlack != cardModel.IsBlack) && (lastCard.Rang == cardModel.Rang + 1);
         }
     }
 
-    protected override void GiveCard(CardPlaceModel cardPlaceModel, CardModel cardModel)
+    protected override void GiveCardsMove(CardPlaceModel cardPlaceModel, CardModel cardModel)
     {
-        base.GiveCard(cardPlaceModel, cardModel);
+        base.GiveCardsMove(cardPlaceModel, cardModel);
         OpenLastCard();
     }
 }

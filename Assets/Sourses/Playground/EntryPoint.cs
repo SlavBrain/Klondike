@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +19,9 @@ public class EntryPoint : MonoBehaviour
     private List<ColumnModel> _columnModels;
     private List<DumpModel> _dumpModels;
 
+    private GameMovesLogger _gameMovesLogger;
+    private MoveCanceler _moveCanceler;
+
     private void OnEnable()
     {
         InitializeDeck();
@@ -30,7 +31,9 @@ public class EntryPoint : MonoBehaviour
         
         InitializePlayground();
         
-        BindButtons();
+        InitializeGameMovesLogger();
+        InitializeMoveCanceler();
+        
         BindEventActions();
     }
 
@@ -73,24 +76,29 @@ public class EntryPoint : MonoBehaviour
         _playground.Initialize(_deckModel,_columnModels,_startButton,_restartButton);
     }
 
-    private void BindButtons()
+    private void InitializeGameMovesLogger()
     {
-        _startButton.onClick.AddListener(_playground.StartGame);
+        _gameMovesLogger = new GameMovesLogger(_playground, _deckModel, _openedCardsModel, _columnModels, _dumpModels);
+    }
+
+    private void InitializeMoveCanceler()
+    {
+        _moveCanceler = new MoveCanceler(_gameMovesLogger, _cancelMoveButton);
     }
 
     private void BindEventActions()
     {
-        _playground.StartingGame += _deckModel.Reset;
-        _playground.StartingGame += _openedCardsModel.Reset;
+        _playground.GameStarting += _deckModel.Reset;
+        _playground.GameStarting += _openedCardsModel.Reset;
 
         foreach(ColumnModel column in _columnModels)
         {
-            _playground.StartingGame += column.Reset;
+            _playground.GameStarting += column.Reset;
         }
 
         foreach(DumpModel dump in _dumpModels)
         {
-            _playground.StartingGame += dump.Reset;
+            _playground.GameStarting += dump.Reset;
         }
     }
 }

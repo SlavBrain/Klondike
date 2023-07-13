@@ -4,6 +4,7 @@ using UnityEngine;
 public class DragableObject : MonoBehaviour
 {
     [SerializeField] private Collider2D _collider;
+    
     private bool _isDragging = false;
     private Vector3 _startPosition;
     private Collider2D[] _nearColliders;
@@ -39,8 +40,10 @@ public class DragableObject : MonoBehaviour
     {
         if (IsObjectInNewPlace(out CardPlaceView cardPlaceView))
         {
-            if(!cardPlaceView.Model.TryTakeCard(this.GetComponent<CardView>().Card))
-                TeleportToStartPosition();
+            if (!cardPlaceView.Model.TryTakeCard(this.GetComponent<CardView>().Card))
+            {
+                TeleportToStartPosition();  
+            }
         }
         else
         {

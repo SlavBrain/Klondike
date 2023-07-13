@@ -1,14 +1,14 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class CardPlaceView : MonoBehaviour
 {
     [SerializeField] protected List<CardView> _cards;
-    protected CardPlaceModel _cardPlaceModel;
+    
+    protected CardPlaceModel CardPlaceModel;
     private bool _isSignedToModel;
 
-    public CardPlaceModel Model => _cardPlaceModel;
+    public CardPlaceModel Model => CardPlaceModel;
 
     private void OnEnable()
     {
@@ -26,8 +26,8 @@ public abstract class CardPlaceView : MonoBehaviour
 
     public void Initialize(CardPlaceModel cardPlaceModel)
     {
-        _cardPlaceModel = cardPlaceModel;
-        _cardPlaceModel.SignToView(this);
+        CardPlaceModel = cardPlaceModel;
+        CardPlaceModel.SignToView(this);
         SignToModelAction();
     }
 
@@ -36,23 +36,29 @@ public abstract class CardPlaceView : MonoBehaviour
         return transform.position;
     }
 
+    public virtual Transform GetNextCardParent()
+    {
+        return this.transform;
+    }
+
     protected virtual void SignToModelAction()
     {
-        if (_cardPlaceModel != null)
+        if (CardPlaceModel != null)
         {
-            _cardPlaceModel.TakedCard += OnTakedCard;
-            _cardPlaceModel.GaveCard += OnGiveCard;
-            _cardPlaceModel.Reseted += OnModelReset;
+            CardPlaceModel.TakedCard += OnTakedCard;
+            CardPlaceModel.GaveCard += OnGiveCardMove;
+            CardPlaceModel.Reseted += OnModelReset;
             _isSignedToModel = true;
         }
     }
 
     protected virtual void UnsignToModelAction()
     {
-        if (_cardPlaceModel != null)
+        if (CardPlaceModel != null)
         {
-            _cardPlaceModel.GaveCard -= OnGiveCard;
-            _cardPlaceModel.Reseted -= OnModelReset;
+            CardPlaceModel.TakedCard += OnTakedCard;
+            CardPlaceModel.GaveCard -= OnGiveCardMove;
+            CardPlaceModel.Reseted -= OnModelReset;
             _isSignedToModel = false;
         }
     }
@@ -62,10 +68,9 @@ public abstract class CardPlaceView : MonoBehaviour
         _cards.Add(card.View);
     }
 
-    private void OnGiveCard(CardPlaceModel cardPlaceModel, CardModel cardModel)
+    private void OnGiveCardMove(CardPlaceModel newCardPlaceModel, CardModel cardModel)
     {
-        cardModel.View.MoveToNewPlace(cardPlaceModel.View);
-        cardPlaceModel.TakeCard(cardModel);
+        cardModel.View.MoveToNewPlace(newCardPlaceModel.View,newCardPlaceModel.View.GetNextCardParent());
         _cards.Remove(cardModel.View);
     }
 

@@ -1,8 +1,12 @@
-using UnityEngine;
-
 public class DumpModel : CardPlaceModel
 {
-    [SerializeField]private CardSuits _currentSuit;
+    private CardSuits _currentSuit;
+    
+    protected override void TakeCard(CardModel card)
+    {
+        base.TakeCard(card);
+        SetSuit(card.Suit);
+    }
     
     protected override bool IsCardCanBeAdded(CardModel cardModel)
     {
@@ -12,14 +16,8 @@ public class DumpModel : CardPlaceModel
         }
         else
         {
-            return cardModel.Suit == _currentSuit && cardModel.Rang == _cards[_cards.Count - 1].Rang + 1;
+            return cardModel.Suit == _currentSuit && cardModel.Rang == _cards[^1].Rang + 1;
         }
-    }
-
-    public override void TakeCard(CardModel card)
-    {
-        base.TakeCard(card);
-        SetSuit(card.Suit);
     }
 
     private void SetSuit(CardSuits suit)

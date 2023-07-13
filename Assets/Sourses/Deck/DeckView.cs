@@ -12,20 +12,20 @@ public class DeckView : CardPlaceView
     {
         if (_cards.Count > 0)
         {
-            _cardPlaceModel.TryGiveTopCard(_openedCardsView.Model);
+            CardPlaceModel.TryGiveTopCard(_openedCardsView.Model);
         }
         else
         {
-            DeckModel deckModel = _cardPlaceModel as DeckModel;
+            DeckModel deckModel = CardPlaceModel as DeckModel;
             deckModel.TakeAllCard(_openedCardsView.Model as OpenedCardsModel);
         }        
     }
     
     protected override void SignToModelAction()
     {
-        if (_cardPlaceModel is DeckModel)
+        if (CardPlaceModel is DeckModel)
         {
-            DeckModel deckModel = _cardPlaceModel as DeckModel;
+            DeckModel deckModel = CardPlaceModel as DeckModel;
             deckModel.CreatedNewCard += AddNewCard;
         }
 
@@ -34,9 +34,9 @@ public class DeckView : CardPlaceView
 
     protected override void UnsignToModelAction()
     {
-        if (_cardPlaceModel is DeckModel)
+        if (CardPlaceModel is DeckModel)
         {
-            DeckModel deckModel = _cardPlaceModel as DeckModel;
+            DeckModel deckModel = CardPlaceModel as DeckModel;
             deckModel.CreatedNewCard -= AddNewCard;
         }
 

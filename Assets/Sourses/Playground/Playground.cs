@@ -9,7 +9,8 @@ public class Playground : MonoBehaviour
     private DeckModel _deckModel;
     private List<ColumnModel> _columnModel;
 
-    public event Action StartingGame;
+    public event Action GameStarting;
+    public event Action GameStarted;
 
     public void Initialize(DeckModel deckModel,List<ColumnModel> columnModels, Button startButton, Button restartButton)
     {
@@ -19,23 +20,24 @@ public class Playground : MonoBehaviour
         restartButton.onClick.AddListener(RestartGame);
     }
 
-    public void StartGame()
+    private void StartGame()
     {
-        StartingGame?.Invoke();
+        GameStarting?.Invoke();
         _deckModel.CreateNew();
         SpreadOutCardToColumns();
+        GameStarted?.Invoke();
     }
 
-    public void RestartGame()
+    private void RestartGame()
     {
-        StartingGame?.Invoke();
+        GameStarting?.Invoke();
         _deckModel.Recover();
         SpreadOutCardToColumns();
+        GameStarted?.Invoke();
     }
 
     private void SpreadOutCardToColumns()
     {
-        Debug.Log("columns "+_columnModel.Count);
         for (int i = 0; i < _columnModel.Count; i++)
         {
             _columnModel[i].Fill(_deckModel,i+1);

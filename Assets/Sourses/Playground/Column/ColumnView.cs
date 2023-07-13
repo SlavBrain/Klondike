@@ -8,4 +8,19 @@ public class ColumnView : CardPlaceView
     {
         return transform.position + _offset * _cards.Count;
     }
+
+    public override Transform GetNextCardParent()
+    {
+        if (_cards.Count > 1)
+        {
+            Debug.Log("to card");
+            return _cards[^1].transform;
+        }
+        else
+        {
+            Debug.Log("to column");
+
+            return base.GetNextCardParent();
+        }
+    }
 }

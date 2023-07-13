@@ -5,13 +5,13 @@ using UnityEngine;
 public class CardModel
 {
     private CardView _cardView;
-    readonly private CardRangs _rang;
-    readonly private CardSuits _suit;
+    private readonly CardRangs _rang;
+    private readonly CardSuits _suit;
     private bool _isOpen=false;
     private bool _isDraggingPermission = false;
-    private bool _isOpeningPermission = false;
 
-    public event Action ChangedOpenState;
+    public event Action<CardModel> ChangedOpenState;
+    public event Action<CardModel> ChangedOpenStateMove;
     public event Action ChangedPermissionDragging;
     
     public CardModel(CardRangs rang, CardSuits suit)
@@ -24,29 +24,49 @@ public class CardModel
     public CardRangs Rang => _rang;
     public CardSuits Suit => _suit;
     public bool IsOpen => _isOpen;
-    public bool IsOpeningPermission => _isOpeningPermission;
     public bool IsDraggingPermission => _isDraggingPermission;
-
-    public bool IsBlack=> _suit == CardSuits.Clubs || _suit == CardSuits.Spades;
+    public bool IsBlack=> _suit is CardSuits.Clubs or CardSuits.Spades;
 
     public void SignToView(CardView cardView)
     {
         _cardView = cardView;
     }
+    
+    public void OpenMove()
+    {
+        Open();
+        ChangedOpenStateMove?.Invoke(this);
+    }
+
+    public void CloseMove()
+    {
+        Close();
+        ChangedOpenStateMove?.Invoke(this);
+    }
 
     public void Open()
     {
         _isOpen = true;
-        _isDraggingPermission = true;
-        ChangedOpenState?.Invoke();
-        ChangedPermissionDragging?.Invoke();
+        ChangedOpenState?.Invoke(this);
+        AllowDragging();
     }
 
     public void Close()
     {
         _isOpen = false;
+        ChangedOpenState?.Invoke(this);
+        BlockDragging();
+    }
+
+    private void AllowDragging()
+    {
+        _isDraggingPermission = true;
+        ChangedPermissionDragging?.Invoke();
+    }
+
+    private void BlockDragging()
+    {
         _isDraggingPermission = false;
-        ChangedOpenState?.Invoke();
         ChangedPermissionDragging?.Invoke();
     }
 }

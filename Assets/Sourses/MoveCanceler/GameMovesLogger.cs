@@ -19,6 +19,53 @@ public class GameMovesLogger
         _openedCardsModel = openedCards;
         _columnModels = columnModels;
         _dumpModels = dumpModels;
+        
+        SignToCardTransfers();
+        SignToCardCreating();
+    }
+
+    private void SignToCardTransfers()
+    {
+        _playground.GameStarted += OnGameStarted;
+        
+        _deckModel.GaveCardsMove += OnCardsMoveTransfer;
+        _openedCardsModel.GaveCardsMove += OnCardsMoveTransfer;
+         
+        foreach (ColumnModel column in _columnModels)
+        {
+            column.GaveCardsMove += OnCardsMoveTransfer;
+        }
+        
+        foreach(DumpModel dump in _dumpModels)
+        {
+            dump.GaveCardsMove += OnCardsMoveTransfer;
+        }
+    }
+
+    private void SignToCardCreating()
+    {
+        _deckModel.CreatedNewCard += SignToCardOpenChange;
+    }
+
+    private void SignToCardOpenChange(CardModel cardModel)
+    {
+        cardModel.ChangedOpenStateMove += OnCardOpenChanged;
+    }
+
+    private void OnCardOpenChanged(CardModel cardModel)
+    {
+        SaveChange(new CardOpenChange(cardModel,cardModel.IsOpen));
+        Debug.Log("cardOpenSave");
+    }
+    
+    private void OnGameStarted()
+    {
+        Reset();
+    }
+
+    private void OnCardsMoveTransfer(CardPlaceModel oldPlace, CardPlaceModel newPlace, List<CardModel> card)
+    {
+        SaveChange(new CardTransferChange(oldPlace,newPlace,card));
     }
 
     private void SaveChange(GameChanges changes)
@@ -26,9 +73,16 @@ public class GameMovesLogger
         _gameChanges.Push(changes);
     }
 
-    private GameChanges GetLastChange()
+    public GameChanges GetLastChange()
     {
-        return _gameChanges.Pop();
+        if (_gameChanges.Count > 0)
+        {
+            return _gameChanges.Pop();  
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private void Reset()
