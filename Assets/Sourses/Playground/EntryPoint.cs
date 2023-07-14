@@ -7,6 +7,7 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _cancelMoveButton;
+    [SerializeField] private EndingGameController _endingGameController;
     
     [SerializeField]private Playground _playground;
     [SerializeField]private DeckView _deckView;
@@ -21,6 +22,7 @@ public class EntryPoint : MonoBehaviour
 
     private GameMovesLogger _gameMovesLogger;
     private MoveCanceler _moveCanceler;
+    private EndGameInspector _endGameInspector;
 
     private void OnEnable()
     {
@@ -33,6 +35,8 @@ public class EntryPoint : MonoBehaviour
         
         InitializeGameMovesLogger();
         InitializeMoveCanceler();
+        InitializeEndGameInspector();
+        InitializeEndingGameController();
         
         BindEventActions();
     }
@@ -84,6 +88,16 @@ public class EntryPoint : MonoBehaviour
     private void InitializeMoveCanceler()
     {
         _moveCanceler = new MoveCanceler(_gameMovesLogger, _cancelMoveButton);
+    }
+
+    private void InitializeEndGameInspector()
+    {
+        _endGameInspector = new EndGameInspector(_dumpModels);
+    }
+
+    private void InitializeEndingGameController()
+    {
+        _endingGameController.Initialize(_endGameInspector);
     }
 
     private void BindEventActions()
