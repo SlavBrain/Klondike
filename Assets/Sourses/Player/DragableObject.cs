@@ -11,7 +11,7 @@ public class DragableObject : MonoBehaviour
     private float _triggerRadius = 0.55f;
     private CardPlaceView _parentCardPlace;
 
-    private float cameraOffset = 47f;
+    private float cameraOffset = -5f;
     
     private void Update()
     {
