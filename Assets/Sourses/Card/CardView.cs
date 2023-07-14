@@ -26,6 +26,7 @@ public class CardView : MonoBehaviour
 
     public void Initialize(CardModel card)
     {
+        gameObject.name = "Card"+card.Rang.ToString() + card.Suit.ToString();
         _cardModel = card;
         _cardModel.SignToView(this);
         Refresh();
@@ -65,6 +66,6 @@ public class CardView : MonoBehaviour
             yield return null;
         }
 
-        transform.SetParent(newParent);
+        transform.SetParent(newParent.gameObject.transform);
     }
 }

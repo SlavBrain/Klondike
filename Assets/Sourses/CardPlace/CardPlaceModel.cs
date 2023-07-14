@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class CardPlaceModel
 {
@@ -84,9 +85,9 @@ public abstract class CardPlaceModel
     protected virtual void GiveCardsMove(CardPlaceModel cardPlaceModel,CardModel cardModel)
     {
         List<CardModel> giftingCards = new List<CardModel>();
-        
+
         int cardPosition = _cards.FindIndex(card=>card==cardModel);
-        
+
         while(_cards.Count>cardPosition)
         {
             giftingCards.Add(_cards[cardPosition]);

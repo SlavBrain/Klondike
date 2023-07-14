@@ -10,6 +10,8 @@ public class DragableObject : MonoBehaviour
     private Collider2D[] _nearColliders;
     private float _triggerRadius = 0.55f;
     private CardPlaceView _parentCardPlace;
+
+    private float cameraOffset = 47f;
     
     private void Update()
     {
@@ -33,7 +35,8 @@ public class DragableObject : MonoBehaviour
 
     private void FollowToTouch()
     {
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 newPositionOnCamera = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position =new Vector3(newPositionOnCamera.x, newPositionOnCamera.y,cameraOffset) ;
     }
 
     private void SetPosition()
@@ -70,7 +73,6 @@ public class DragableObject : MonoBehaviour
 
         if (nearestCardPlaceCollider != null)
         {
-            Debug.Log(nearestCardPlaceCollider.gameObject.name);
             nearestCardPlaceView = nearestCardPlaceCollider.GetComponent<CardPlaceView>();
         }
         

@@ -9,10 +9,11 @@ public class Dragger : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&&_currentDragableObject==null)
         {
             _worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             hit = Physics2D.Raycast(_worldPoint, Vector2.zero);
+
             if (hit.transform != null)
             {
                 if (hit.transform.TryGetComponent<DragableObject>(out DragableObject dragableObject))

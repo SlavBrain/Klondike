@@ -55,7 +55,6 @@ public class GameMovesLogger
     private void OnCardOpenChanged(CardModel cardModel)
     {
         SaveChange(new CardOpenChange(cardModel,cardModel.IsOpen));
-        Debug.Log("cardOpenSave");
     }
     
     private void OnGameStarted()
