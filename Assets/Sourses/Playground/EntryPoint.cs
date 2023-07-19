@@ -7,6 +7,7 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _cancelMoveButton;
+    [SerializeField] private Button _findMovesButton;
     [SerializeField] private EndingGameController _endingGameController;
     
     [SerializeField]private Playground _playground;
@@ -24,6 +25,8 @@ public class EntryPoint : MonoBehaviour
     private MoveCanceler _moveCanceler;
     private EndGameInspector _endGameInspector;
 
+    private MoveFinder _moveFinder;
+    
     private void OnEnable()
     {
         InitializeDeck();
@@ -37,7 +40,9 @@ public class EntryPoint : MonoBehaviour
         InitializeMoveCanceler();
         InitializeEndGameInspector();
         InitializeEndingGameController();
+        InitializeMoveFinder();
         
+        BindButtons();
         BindEventActions();
     }
 
@@ -98,6 +103,16 @@ public class EntryPoint : MonoBehaviour
     private void InitializeEndingGameController()
     {
         _endingGameController.Initialize(_endGameInspector);
+    }
+
+    private void InitializeMoveFinder()
+    {
+        _moveFinder = new MoveFinder(_openedCardsModel, _columnModels, _dumpModels);
+    }
+
+    private void BindButtons()
+    {
+        _findMovesButton.onClick.AddListener(_moveFinder.OnHelpInvoke);
     }
 
     private void BindEventActions()

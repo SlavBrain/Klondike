@@ -20,7 +20,7 @@ public class DumpModel : CardPlaceModel
         CheckFilling();
     }
     
-    protected override bool IsCardCanBeAdded(CardModel cardModel)
+    public override bool IsCardCanBeAdded(CardModel cardModel)
     {
         if (_cards.Count == 0)
         {

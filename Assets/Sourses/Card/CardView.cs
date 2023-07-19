@@ -44,6 +44,16 @@ public class CardView : MonoBehaviour
         _moving = StartCoroutine(MovingToPlace(cardPlaceView,newParent));
     }
 
+    public void MoveBoomerang(CardPlaceView cardPlaceView)
+    {
+        if (_moving != null)
+        {
+            StopCoroutine(_moving);
+        }
+
+        _moving = StartCoroutine(MovingBoomerang(cardPlaceView));
+    }
+
     private void Refresh(CardModel cardModel=null)
     {
         _spriteRenderer.sprite = _cardModel.IsOpen ? _deckImages.GetCardSprite(_cardModel.Rang, _cardModel.Suit) : _downSprite;
@@ -67,5 +77,27 @@ public class CardView : MonoBehaviour
         }
 
         transform.SetParent(newParent.gameObject.transform);
+    }
+
+    private IEnumerator MovingBoomerang(CardPlaceView cardPlaceView)
+    {
+        Vector3 oldPosition = transform.position;
+        Vector3 tempPosition = cardPlaceView.GetNextCardPosition();
+        
+        transform.position = new Vector3(transform.position.x, transform.position.y, tempPosition.z);
+        
+        while (Vector3.Distance(transform.position,tempPosition)!>0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position,tempPosition,_movingSpeed*Time.deltaTime);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        
+        while (Vector3.Distance(transform.position,oldPosition)!>0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position,oldPosition,_movingSpeed*Time.deltaTime);
+            yield return null;
+        }
     }
 }

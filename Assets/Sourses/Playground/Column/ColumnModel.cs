@@ -1,5 +1,24 @@
 public class ColumnModel: CardPlaceModel
 {
+    public CardModel LastCardModel => _cards[^1];
+    public bool IsAllCardOpened
+    {
+        get
+        {
+            if (_cards.Count > 0)
+            {
+                foreach (CardModel card in _cards)
+                {
+                    if (!card.IsOpen)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+        
+    }
+    
     public void Fill(DeckModel deck,int startCardCount)
     {
         for (int i = 0; i < startCardCount; i++)
@@ -19,7 +38,7 @@ public class ColumnModel: CardPlaceModel
         }
     }
 
-    protected override bool IsCardCanBeAdded(CardModel cardModel)
+    public override bool IsCardCanBeAdded(CardModel cardModel)
     {
         if (_cards.Count == 0)
         {

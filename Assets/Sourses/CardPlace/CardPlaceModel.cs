@@ -65,6 +65,11 @@ public abstract class CardPlaceModel
         cardPlaceModel.TakeCard(cardModel);
         GaveCard?.Invoke(cardPlaceModel,cardModel);
     }
+    
+    public virtual bool IsCardCanBeAdded(CardModel cardModel)
+    {
+        return false;
+    }
 
     protected virtual void TakeCard(CardModel card)
     {
@@ -72,11 +77,6 @@ public abstract class CardPlaceModel
         TakedCard?.Invoke(card);
     }
     
-    protected virtual bool IsCardCanBeAdded(CardModel cardModel)
-    {
-        return false;
-    }
-
     private void RequiredCard(CardPlaceModel cardPlaceModel,CardModel cardModel)
     {
         cardPlaceModel.GiveCardsMove(this,cardModel);
