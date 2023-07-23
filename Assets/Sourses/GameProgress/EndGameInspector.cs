@@ -28,7 +28,6 @@ public class EndGameInspector
 
     private void CheckFillingAllDumps()
     {
-        Debug.Log("Checking GAme Ended");
         foreach (DumpModel dump in _dumpModels)
         {
             if (!dump.IsFill)
@@ -36,7 +35,7 @@ public class EndGameInspector
                 return;
             }
         }
-        Debug.Log("GAme Ended");
+        
         GameEnded?.Invoke();
     }
 }

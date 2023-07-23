@@ -5,9 +5,24 @@ public class DumpModel : CardPlaceModel
 {
     private CardSuits _currentSuit;
 
-    public bool IsFill => _cards[^1].Rang == CardRangs.King;
+    public bool IsFill {
+        get
+        {
+            if (Cards.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+               return  _cards[^1].Rang == CardRangs.King;
+            }
+            
+        }
+        
+    }
 
     public event Action Filled;
+    
     protected override void TakeCard(CardModel card)
     {
         if (_cards.Count == 0)
@@ -39,10 +54,8 @@ public class DumpModel : CardPlaceModel
 
     private void CheckFilling()
     {
-        Debug.Log("CheckFillingDump");
         if (_cards[^1].Rang == CardRangs.King)
         {
-            Debug.Log("DumpFilled");
             Filled?.Invoke();
         }
     }

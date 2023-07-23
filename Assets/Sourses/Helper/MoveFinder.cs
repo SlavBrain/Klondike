@@ -31,7 +31,7 @@ public class MoveFinder
         }
     }
 
-    private bool TryFindAvailableMoves(out CardModel cardModel, out CardPlaceModel cardPlaceModel)
+    public bool TryFindMoveToDump(out CardModel cardModel, out CardPlaceModel cardPlaceModel)
     {
         cardModel = null;
         cardPlaceModel = null;
@@ -39,6 +39,33 @@ public class MoveFinder
         if (TryFindMovesColumnToDump(out cardModel, out cardPlaceModel))
             return true;
         if (TryFindMovesOpenCardToDump(out cardModel, out cardPlaceModel))
+            return true;
+
+        return false;
+    }
+
+    public bool TryFindCardMoveToDump(CardModel cardModel, out CardPlaceModel cardPlaceModel)
+    {
+        cardPlaceModel = null;
+        
+        foreach (DumpModel dumpModel in _dumpModels)
+        {
+            if (dumpModel.IsCardCanBeAdded(cardModel))
+            {
+                cardPlaceModel = dumpModel;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool TryFindAvailableMoves(out CardModel cardModel, out CardPlaceModel cardPlaceModel)
+    {
+        cardModel = null;
+        cardPlaceModel = null;
+        
+        if (TryFindMoveToDump(out cardModel, out cardPlaceModel))
             return true;
         if (TryFindMovesColumnToColumn(out cardModel, out cardPlaceModel))
             return true;

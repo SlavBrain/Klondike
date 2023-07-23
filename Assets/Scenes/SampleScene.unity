@@ -7692,6 +7692,7 @@ MonoBehaviour:
   _cancelMoveButton: {fileID: 1219316043}
   _findMovesButton: {fileID: 451621941}
   _endingGameController: {fileID: 720796150}
+  _inputController: {fileID: 519420033}
   _playground: {fileID: 2051765198}
   _deckView: {fileID: 432776187}
   _openedCardsView: {fileID: 1942251293}

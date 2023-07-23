@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Random = System.Random;
 
 public class DeckModel: CardPlaceModel
@@ -11,7 +10,6 @@ public class DeckModel: CardPlaceModel
 
     public void CreateNew()
     {
-            
         foreach (CardSuits suit in Enum.GetValues(typeof(CardSuits)))
         {
             foreach (CardRangs rang in Enum.GetValues(typeof(CardRangs)))
@@ -40,7 +38,6 @@ public class DeckModel: CardPlaceModel
         for(int i=openedCardsesModel.Cards.Count;i>=0; i--)
         {
             openedCardsesModel.TryGiveTopCard(this);
-            
         }        
     }
 

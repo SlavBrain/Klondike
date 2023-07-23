@@ -11,27 +11,27 @@ public class CardView : MonoBehaviour
 
     private readonly float _movingSpeed=30f;
     
-    private CardModel _cardModel;
+    private CardModel _modelModel;
     private Vector3 _newPosition;
     
     private Coroutine _moving;
 
-    public CardModel Card => _cardModel;
+    public CardModel Model => _modelModel;
 
     public void OnDestroy()
     {
-        _cardModel.ChangedOpenState -= Refresh;
-        _cardModel.ChangedPermissionDragging -= OnChangedDraggingPermission;
+        _modelModel.ChangedOpenState -= Refresh;
+        _modelModel.ChangedPermissionDragging -= OnChangedDraggingPermission;
     }
 
     public void Initialize(CardModel card)
     {
         gameObject.name = "Card"+card.Rang.ToString() + card.Suit.ToString();
-        _cardModel = card;
-        _cardModel.SignToView(this);
+        _modelModel = card;
+        _modelModel.SignToView(this);
         Refresh();
-        _cardModel.ChangedOpenState += Refresh;
-        _cardModel.ChangedPermissionDragging += OnChangedDraggingPermission;
+        _modelModel.ChangedOpenState += Refresh;
+        _modelModel.ChangedPermissionDragging += OnChangedDraggingPermission;
     }
     
     public void MoveToNewPlace(CardPlaceView cardPlaceView, Transform newParent)
@@ -56,12 +56,12 @@ public class CardView : MonoBehaviour
 
     private void Refresh(CardModel cardModel=null)
     {
-        _spriteRenderer.sprite = _cardModel.IsOpen ? _deckImages.GetCardSprite(_cardModel.Rang, _cardModel.Suit) : _downSprite;
+        _spriteRenderer.sprite = _modelModel.IsOpen ? _deckImages.GetCardSprite(_modelModel.Rang, _modelModel.Suit) : _downSprite;
     }
     
     private void OnChangedDraggingPermission()
     {
-        _dragableObject.enabled = _cardModel.IsDraggingPermission;
+        _dragableObject.enabled = _modelModel.IsDraggingPermission;
     }
 
     private IEnumerator MovingToPlace(CardPlaceView cardPlaceView, Transform newParent)
