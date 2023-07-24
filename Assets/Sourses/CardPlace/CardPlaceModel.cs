@@ -14,7 +14,7 @@ public abstract class CardPlaceModel
 
     public event Action<CardPlaceModel,CardPlaceModel,List<CardModel>> GaveCardsMove;
     public event Action<CardPlaceModel,CardModel> GaveCard;
-    public event Action<CardModel> TakedCard;
+    //public event Action<CardModel> TakedCard;
     public event Action Reseted;
 
     public CardPlaceView View => _cardPlaceView;
@@ -74,7 +74,6 @@ public abstract class CardPlaceModel
     protected virtual void TakeCard(CardModel card)
     {
         _cards.Add(card);
-        TakedCard?.Invoke(card);
     }
     
     private void RequiredCard(CardPlaceModel cardPlaceModel,CardModel cardModel)

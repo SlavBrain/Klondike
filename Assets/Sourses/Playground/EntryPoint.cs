@@ -10,6 +10,7 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private Button _findMovesButton;
     [SerializeField] private EndingGameController _endingGameController;
     [SerializeField] private InputController _inputController;
+    [SerializeField] private CardTransferController _cardTransferController;
     
     [SerializeField]private Playground _playground;
     [SerializeField]private DeckView _deckView;
@@ -52,13 +53,13 @@ public class EntryPoint : MonoBehaviour
     private void InitializeDeck()
     {
         _deckModel = new DeckModel();
-        _deckView.Initialize(_deckModel);
+        _deckView.Initialize(_deckModel,_cardTransferController);
     }
     
     private void InitializeOpenedCards()
     {
         _openedCardsModel = new OpenedCardsModel();
-        _openedCardsView.Initialize(_openedCardsModel);
+        _openedCardsView.Initialize(_openedCardsModel,_cardTransferController);
     }
 
     private void InitializeColumns()
@@ -68,7 +69,7 @@ public class EntryPoint : MonoBehaviour
         for (int i = 0; i < _columnViews.Count; i++)
         {
             _columnModels.Add(new ColumnModel());
-            _columnViews[i].Initialize(_columnModels[i]);
+            _columnViews[i].Initialize(_columnModels[i],_cardTransferController);
         }
     }
 
@@ -79,7 +80,7 @@ public class EntryPoint : MonoBehaviour
         for (int i = 0; i < _dumpViews.Count; i++)
         {
             _dumpModels.Add(new DumpModel());
-            _dumpViews[i].Initialize(_dumpModels[i]);
+            _dumpViews[i].Initialize(_dumpModels[i],_cardTransferController);
         }
     }
 

@@ -9,7 +9,8 @@ public class CardView : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private DragableObject _dragableObject;
 
-    private readonly float _movingSpeed=30f;
+    private readonly float _movingSpeed=50f;
+    private readonly float _movingCoordinateZ = -10;
     
     private CardModel _modelModel;
     private Vector3 _newPosition;
@@ -54,6 +55,16 @@ public class CardView : MonoBehaviour
         _moving = StartCoroutine(MovingBoomerang(cardPlaceView));
     }
 
+    public void MoveToDot(Vector3 newPosition)
+    {
+        if (_moving != null)
+        {
+            StopCoroutine(_moving);
+        }
+
+        _moving = StartCoroutine(MovingToDot(newPosition));
+    }
+
     private void Refresh(CardModel cardModel=null)
     {
         _spriteRenderer.sprite = _modelModel.IsOpen ? _deckImages.GetCardSprite(_modelModel.Rang, _modelModel.Suit) : _downSprite;
@@ -64,19 +75,30 @@ public class CardView : MonoBehaviour
         _dragableObject.enabled = _modelModel.IsDraggingPermission;
     }
 
+    private IEnumerator MovingToDot(Vector3 newPosition)
+    {
+        while (Vector3.Distance(transform.position,newPosition)!>0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position,newPosition,_movingSpeed*Time.deltaTime);
+            yield return null;
+        }
+    }
+
     private IEnumerator MovingToPlace(CardPlaceView cardPlaceView, Transform newParent)
     {
         _newPosition = cardPlaceView.GetNextCardPosition();
-
-        transform.position = new Vector3(transform.position.x, transform.position.y, _newPosition.z);
+        Vector3 tempNewPositionForMoving = new Vector3(_newPosition.x, _newPosition.y, _movingCoordinateZ);
+        transform.position = new Vector3(transform.position.x, transform.position.y, _movingCoordinateZ);
         
-        while (Vector3.Distance(transform.position,_newPosition)!>0.01f)
+        while (Vector3.Distance(transform.position,tempNewPositionForMoving)!>0.01f)
         {
-            transform.position = Vector3.MoveTowards(transform.position,_newPosition,_movingSpeed*Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position,tempNewPositionForMoving,_movingSpeed*Time.deltaTime);
             yield return null;
         }
 
         transform.SetParent(newParent.gameObject.transform);
+        transform.position = _newPosition;
+        cardPlaceView.OnTakedCard(this.Model);
     }
 
     private IEnumerator MovingBoomerang(CardPlaceView cardPlaceView)

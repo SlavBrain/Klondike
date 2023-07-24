@@ -7668,6 +7668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1500511348}
   - component: {fileID: 1500511347}
+  - component: {fileID: 1500511349}
   m_Layer: 0
   m_Name: EntryPoint
   m_TagString: Untagged
@@ -7693,6 +7694,7 @@ MonoBehaviour:
   _findMovesButton: {fileID: 451621941}
   _endingGameController: {fileID: 720796150}
   _inputController: {fileID: 519420033}
+  _cardTransferController: {fileID: 1500511349}
   _playground: {fileID: 2051765198}
   _deckView: {fileID: 432776187}
   _openedCardsView: {fileID: 1942251293}
@@ -7724,6 +7726,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1500511349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500511346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709149a7dbf82f44e915c044fe1b51b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1629244706
 GameObject:
   m_ObjectHideFlags: 0

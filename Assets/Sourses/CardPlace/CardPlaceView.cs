@@ -6,8 +6,10 @@ public abstract class CardPlaceView : MonoBehaviour
     [SerializeField] protected List<CardView> _cards;
     
     protected CardPlaceModel CardPlaceModel;
+    protected virtual Vector3 Offset { get; }= Vector3.zero;
     private bool _isSignedToModel;
-
+    private CardTransferController _cardTransferController;
+    
     public CardPlaceModel Model => CardPlaceModel;
 
     private void OnEnable()
@@ -24,9 +26,10 @@ public abstract class CardPlaceView : MonoBehaviour
             UnsignToModelAction();
     }
 
-    public void Initialize(CardPlaceModel cardPlaceModel)
+    public void Initialize(CardPlaceModel cardPlaceModel,CardTransferController cardTransferController)
     {
         CardPlaceModel = cardPlaceModel;
+        _cardTransferController = cardTransferController;
         CardPlaceModel.SignToView(this);
         SignToModelAction();
     }
@@ -45,7 +48,6 @@ public abstract class CardPlaceView : MonoBehaviour
     {
         if (CardPlaceModel != null)
         {
-            CardPlaceModel.TakedCard += OnTakedCard;
             CardPlaceModel.GaveCard += OnGiveCardMove;
             CardPlaceModel.Reseted += OnModelReset;
             _isSignedToModel = true;
@@ -56,21 +58,21 @@ public abstract class CardPlaceView : MonoBehaviour
     {
         if (CardPlaceModel != null)
         {
-            CardPlaceModel.TakedCard += OnTakedCard;
             CardPlaceModel.GaveCard -= OnGiveCardMove;
             CardPlaceModel.Reseted -= OnModelReset;
             _isSignedToModel = false;
         }
     }
 
-    protected virtual void OnTakedCard(CardModel card)
+    public virtual void OnTakedCard(CardModel card)
     {
         _cards.Add(card.View);
+        Refresh();
     }
 
     private void OnGiveCardMove(CardPlaceModel newCardPlaceModel, CardModel cardModel)
     {
-        cardModel.View.MoveToNewPlace(newCardPlaceModel.View,newCardPlaceModel.View.GetNextCardParent());
+        _cardTransferController.AddTransfer(cardModel,newCardPlaceModel);
         _cards.Remove(cardModel.View);
     }
 
@@ -82,5 +84,13 @@ public abstract class CardPlaceView : MonoBehaviour
         }
 
         _cards.Clear();
+    }
+
+    protected virtual void Refresh()
+    {
+        for (int i = 0; i < _cards.Count; i++)
+        {
+            _cards[i].transform.position = transform.position + Offset * i;
+        }
     }
 }

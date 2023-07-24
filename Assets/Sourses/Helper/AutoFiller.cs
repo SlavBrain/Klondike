@@ -46,11 +46,16 @@ public class AutoFiller
     
     private void FillAll()
     {
-        while (IsAllDumpsFilled())
+        while (!IsAllDumpsFilled())
         {
+            
             FillAvailable();
-            DeckView deckView = (DeckView)_deckModel.View;
-            deckView.OnOpenCardButtonClick();
+            
+            if (_deckModel.Cards.Count == 0)
+            {
+                DeckView deckView = (DeckView)_deckModel.View;
+                deckView.OnOpenCardButtonClick();
+            }
         }
     }
     
@@ -93,7 +98,7 @@ public class AutoFiller
     {
         foreach (DumpModel dumpModel in _dumpModels)
         {
-            if (!dumpModel.IsFill)
+            if ((!dumpModel.IsFill)&&dumpModel.Cards.Count>0)
             {
                 return false;
             }

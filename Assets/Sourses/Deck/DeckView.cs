@@ -5,7 +5,7 @@ public class DeckView : CardPlaceView
 {
     [SerializeField] private CardView _cardTemplate;
     [SerializeField] private OpenedCardsView _openedCardsView;
-    private Vector3 _offset = new(0, 0, -0.1f);
+    protected override Vector3 Offset { get; } = new Vector3(0, 0, -0.1f);
 
     public void OnOpenCardButtonClick()
     {
@@ -44,7 +44,7 @@ public class DeckView : CardPlaceView
 
     private void AddNewCard(CardModel card)
     {
-        CardView newCard = Instantiate(_cardTemplate, transform.position + _offset*_cards.Count, quaternion.identity, transform);
+        CardView newCard = Instantiate(_cardTemplate, transform.position + Offset*_cards.Count, quaternion.identity, transform);
         newCard.Initialize(card);
         _cards.Add(newCard);
     }
