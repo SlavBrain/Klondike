@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: fe6af775a26bab04da458177a657beea
+  - enabled: 1
+    path: Assets/Samples/Web Utility/3.0.0/Playtesting Sample/PlaytestingScene.unity
+    guid: f217115a68ee0f9459dd5bd77192cdae
   m_configObjects: {}

@@ -4,9 +4,7 @@ using IJunior.TypedScenes;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Sources.Common
-{
-    public class AsyncLoadScene : MonoBehaviour
+public class AsyncLoadScene : MonoBehaviour
     {
         [Header("Objects")]
         [SerializeField] private Saver _saver;
@@ -81,7 +79,7 @@ namespace Sources.Common
             }
             SetDefaultValues();
 
-            MainMenu.Load();
+            IJunior.TypedScenes.MainMenu.Load();
         }
 
         private IEnumerator AsyncLoad(AsyncOperation operation)
@@ -106,4 +104,3 @@ namespace Sources.Common
             _panel.Disable();
         }
     }
-}
