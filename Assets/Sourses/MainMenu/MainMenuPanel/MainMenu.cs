@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using IJunior.TypedScenes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +13,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button _leaderboardButton;
     [SerializeField] private Button _rewardButton;
     [SerializeField] private BetChangerView _betChangerView;
+    [SerializeField] private TMP_Text _playerWalletValueText;
 
     [SerializeField] private LeaderboardMenu _leaderboardMenu;
     [SerializeField] private SettingMenu _settingMenu;
@@ -35,36 +38,30 @@ public class MainMenu : MonoBehaviour
     private void OnEnable()
     {
         _playButton.onClick.AddListener(OnPlayButtonClick);
-        _settingButton.onClick.AddListener(OnSettingButtonClick);
-        _leaderboardButton.onClick.AddListener(OnLeaderboardButtonClick);
         _rewardButton.onClick.AddListener(OnRewardButtonClick);
+        PlayerData.Instance.ChangedValue += SetWalletValueText;
+        SetWalletValueText();
     }
 
     private void OnDisable()
     {
         _playButton.onClick.RemoveListener(OnPlayButtonClick);
-        _settingButton.onClick.RemoveListener(OnSettingButtonClick);
-        _leaderboardButton.onClick.RemoveListener(OnLeaderboardButtonClick);
         _rewardButton.onClick.RemoveListener(OnRewardButtonClick);
+        PlayerData.Instance.ChangedValue += SetWalletValueText;
     }
 
     private void OnPlayButtonClick()
     {
-        
-    }
-
-    private void OnSettingButtonClick()
-    {
-        
-    }
-
-    private void OnLeaderboardButtonClick()
-    {
-        
+        KlondikeGame.Load();
     }
 
     private void OnRewardButtonClick()
     {
         
+    }
+
+    private void SetWalletValueText()
+    {
+        _playerWalletValueText.text = PlayerData.Instance.CoinValue.ToString();
     }
 }

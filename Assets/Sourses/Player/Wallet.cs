@@ -1,16 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class Wallet : MonoBehaviour
+public class Wallet
 {
-    public int Value { get; private set; }
+    public Wallet(int value=1000)
+    {
+        Value = value;
+    }
+    
+    public int Value { get; private set; } = 1000;
 
+    public event Action ChangedValue; 
+    
     public void Add(int addingValue)
     {
         if (addingValue > 0)
         {
             Value += addingValue;
+            ChangedValue?.Invoke();
         }
     }
 
@@ -19,6 +26,7 @@ public class Wallet : MonoBehaviour
         if (removingValue < Value && removingValue > 0)
         {
             Value -= removingValue;
+            ChangedValue?.Invoke();
             return true;
         }
 

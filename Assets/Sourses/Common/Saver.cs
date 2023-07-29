@@ -7,7 +7,7 @@ public class Saver : MonoBehaviour
 {
     public static Saver Instance { get; private set; }
     public static bool IsLoaded { get; private set; }
-    public SaveData SaveData { get; private set; }
+    public SaveData SaveData;
 
     public void Initialize()
     {
@@ -25,6 +25,25 @@ public class Saver : MonoBehaviour
         }
     }
 
+    public void SaveLastRewardDay(DateTime date)
+    {
+        SaveData.LastRewardedDay = date.ToString();
+        Debug.Log("SaveRewardDate "+SaveData.LastRewardedDay);
+        Save();
+    }
+
+    public DateTime GetLastRewardDay()
+    {
+        DateTime.TryParse(SaveData.LastRewardedDay, out DateTime lastRewardDate);
+        return lastRewardDate;
+    }
+
+    public void SavePlayerData()
+    {
+        SaveData.CoinValue = PlayerData.Instance.CoinValue;
+        Save();
+    }
+
     public void SaveMusicSetting()
     {
         
@@ -40,7 +59,35 @@ public class Saver : MonoBehaviour
         
     }
 
-    private void Load() => PlayerAccount.GetCloudSaveData(onSuccessCallback: OnLoaded);
+    private void Save()
+    {
+#if UNITY_WEBGL
+        PlayerAccount.SetCloudSaveData(JsonUtility.ToJson(SaveData));
+#else
+        PlayerPrefs.SetString("SaveData",JsonUtility.ToJson(SaveData));
+#endif
+    }
+
+    private void Load()
+    {
+#if UNITY_WEBGL
+        PlayerAccount.GetCloudSaveData(onSuccessCallback: OnLoaded);
+#else
+        if (PlayerPrefs.HasKey("SaveData"))
+        {
+            OnLoaded(PlayerPrefs.GetString("SaveData"));
+        }
+        else
+        {
+            Debug.Log("null savedata");
+            SaveData = new SaveData();
+            IsLoaded = true;
+        }
+#endif
+
+        Debug.Log("Load"+ SaveData.CoinValue);
+        Debug.Log("Load"+GetLastRewardDay());
+    }
 
     private void OnLoaded(string jsonData)
     {
@@ -52,10 +99,11 @@ public class Saver : MonoBehaviour
 [Serializable]
 public class SaveData
 {
-    [field: Preserve] public PlayerData PlayerData;
+    [field: Preserve] public int CoinValue;
     [field: Preserve] public float MusicVolumeValue;
     [field: Preserve] public bool MusicChanged;
     [field: Preserve] public bool IsTrained;
+    [field: Preserve] public string LastRewardedDay;
 }
 
 
