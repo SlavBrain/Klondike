@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Agava.YandexGames;
 using IJunior.TypedScenes;
 using TMPro;
 using UnityEngine;
@@ -12,7 +13,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button _settingButton;
     [SerializeField] private Button _leaderboardButton;
     [SerializeField] private Button _rewardButton;
-    [SerializeField] private BetChangerView _betChangerView;
+    [SerializeField] private BetChanger _betChanger;
+    [SerializeField] private TMP_Text _nicknameLabel;
     [SerializeField] private TMP_Text _playerWalletValueText;
 
     [SerializeField] private LeaderboardMenu _leaderboardMenu;
@@ -26,8 +28,8 @@ public class MainMenu : MonoBehaviour
         if (Instance == null)
         {
             transform.parent = null;
-            DontDestroyOnLoad(gameObject);
             Instance = this;
+            _betChanger.Initialize();
         }
         else
         {
@@ -41,6 +43,7 @@ public class MainMenu : MonoBehaviour
         _rewardButton.onClick.AddListener(OnRewardButtonClick);
         PlayerData.Instance.ChangedValue += SetWalletValueText;
         SetWalletValueText();
+        SetNicknameLabel();
     }
 
     private void OnDisable()
@@ -52,7 +55,46 @@ public class MainMenu : MonoBehaviour
 
     private void OnPlayButtonClick()
     {
-        KlondikeGame.Load();
+        if (_betChanger.CurrentBet > 0)
+        {
+            if (PlayerData.Instance.HaveEnoughMoney(Saver.Instance.SaveData.LastBet))
+            {
+                KlondikeGame.Load();
+            }
+            else
+            {
+                Debug.Log("Not enough money");
+            }
+        }
+        else if(_betChanger.CurrentBet==0)
+        {
+            KlondikeGame.Load();
+        }
+        else
+        {
+            throw new Exception("Negative bet value");
+        }
+    }
+
+    private void SetNicknameLabel()
+    {
+        _nicknameLabel.SetText(GetNickname());
+    }
+
+    private string GetNickname()
+    {
+        
+#if !UNITY_WEBGL || UNITY_EDITOR
+        return "Anonymous";
+#endif
+        
+        PlayerAccount.GetProfileData((result) =>
+        {
+            string name = result.publicName;
+            if (string.IsNullOrEmpty(name))
+                name = "Anonymous";
+        });
+        return name;
     }
 
     private void OnRewardButtonClick()
