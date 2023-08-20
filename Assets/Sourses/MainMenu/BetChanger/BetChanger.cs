@@ -1,9 +1,8 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BetChangerView : MonoBehaviour
+public class BetChanger : MonoBehaviour
 {
     [SerializeField] private TMP_Text _value;
     [SerializeField] private Button _downButton;
@@ -11,54 +10,69 @@ public class BetChangerView : MonoBehaviour
     
     
     private int _currentBetNumber;
-    private int[] _betVariables = new[] { 10, 20, 50, 100, 250 };
+    private int[] _betVariables = new[] { 10, 20, 50, 100, 250 , 1000, 2500, 10000};
+    private bool _isMaxValue => _currentBetNumber == _betVariables.Length - 1;
+    private bool _isMinValue => _currentBetNumber == 0;
 
-    private BetChangerModel _model;
+    public int CurrentBet => _betVariables[_currentBetNumber];
 
-    public event Action Initialize;
-
-    public Button UpButton => _upButton;
-    public Button DownButton => _downButton;
-
+    public void Initialize()
+    {
+        SetStartCurrentValue();
+    }
+    
     private void OnEnable()
     {
-        _model = new(this);
-        _model.ChangedBetValue += SetTextValue;
-        Initialize?.Invoke();
+        _upButton.onClick.AddListener(UpBet);
+        _downButton.onClick.AddListener(DownBet);
     }
 
     private void OnDisable()
     {
-        _model.ChangedBetValue -= SetTextValue;
+        _upButton.onClick.RemoveListener(UpBet);
+        _downButton.onClick.RemoveListener(DownBet);
     }
     
     private void SetStartCurrentValue()
     {
-        _currentBetNumber = 0;
+        int lastBet = Saver.Instance.SaveData.LastBet;
+        
+        for (int i = _betVariables.Length - 1; i >= 0; i--)
+        {
+            if (lastBet >= _betVariables[i])
+            {
+                _currentBetNumber = i;
+                break;
+            }
+        }
+        
+        SetTextValue();
     }
 
-    private void SetTextValue(int value)
+    private void SetTextValue()
     {
-        _value.text = value.ToString();
+        _value.text = _betVariables[_currentBetNumber].ToString();
     }
     
     private void UpBet()
     {
-        if (!IsMaxValue)
+        if (!_isMaxValue)
         {
             _currentBetNumber++;
+            Saver.Instance.SaveData.LastBet = CurrentBet;
         }
         
-        ChangedBetValue?.Invoke(CurrentBet);
+        SetTextValue();
     }
     
     private void DownBet()
     {
-        if (!IsMinValue)
+        if (!_isMinValue)
         {
             _currentBetNumber--;
+            Saver.Instance.SaveData.LastBet = CurrentBet;
         }
         
-        ChangedBetValue?.Invoke(CurrentBet);
+        SetTextValue();
     }
 }

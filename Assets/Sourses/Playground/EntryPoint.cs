@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using IJunior.TypedScenes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _cancelMoveButton;
     [SerializeField] private Button _findMovesButton;
+    [SerializeField] private Button _backToMenuButton;
     [SerializeField] private EndingGameController _endingGameController;
     [SerializeField] private InputController _inputController;
     [SerializeField] private CardTransferController _cardTransferController;
@@ -122,6 +124,7 @@ public class EntryPoint : MonoBehaviour
     private void BindButtons()
     {
         _findMovesButton.onClick.AddListener(_moveFinder.OnHelpInvoke);
+        _backToMenuButton.onClick.AddListener(BackToMainMenu);
     }
 
     private void BindEventActions()
@@ -138,5 +141,10 @@ public class EntryPoint : MonoBehaviour
         {
             _playground.GameStarting += dump.Reset;
         }
+    }
+
+    private void BackToMainMenu()
+    {
+        MainMenu.Load();
     }
 }

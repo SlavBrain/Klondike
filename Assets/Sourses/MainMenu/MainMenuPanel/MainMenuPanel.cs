@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenuPanel : MonoBehaviour
 {
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _settingButton;
@@ -17,11 +17,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TMP_Text _nicknameLabel;
     [SerializeField] private TMP_Text _playerWalletValueText;
 
-    [SerializeField] private LeaderboardMenu _leaderboardMenu;
+    [SerializeField] private LeaderboardView _leaderboardMenu;
     [SerializeField] private SettingMenu _settingMenu;
     
 
-    public static MainMenu Instance { get; private set; }
+    public static MainMenuPanel Instance { get; private set; }
     
     public void Initialize()
     {
@@ -50,7 +50,7 @@ public class MainMenu : MonoBehaviour
     {
         _playButton.onClick.RemoveListener(OnPlayButtonClick);
         _rewardButton.onClick.RemoveListener(OnRewardButtonClick);
-        PlayerData.Instance.ChangedValue += SetWalletValueText;
+        PlayerData.Instance.ChangedValue -= SetWalletValueText;
     }
 
     private void OnPlayButtonClick()

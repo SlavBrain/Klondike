@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class MainMenuBootstrap : MonoBehaviour
 {
-    [SerializeField] private MainMenu _mainMenu;
+    [SerializeField] private MainMenuPanel _mainMenuPanel;
     [SerializeField] private SettingMenu _settingMenu;
-    [SerializeField] private LeaderboardMenu _leaderboardMenu;
+    [SerializeField] private LeaderboardView _leaderboardMenu;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Rewarder _rewarder;
     [SerializeField] private Saver _saver;
@@ -13,7 +13,7 @@ public class MainMenuBootstrap : MonoBehaviour
     {
         _saver.Initialize();
         _playerData.Initialize();
-        _mainMenu.Initialize();
+        _mainMenuPanel.Initialize();
         _settingMenu.Initialize();
         _leaderboardMenu.Initialize();
         _rewarder.Initialize();

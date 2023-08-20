@@ -36,6 +36,12 @@ public class EndGameInspector
             }
         }
         
+        StartGameEnd();
+    }
+
+    private void StartGameEnd()
+    {
         GameEnded?.Invoke();
+        PlayerData.Instance.OnSuccessEndedGame();
     }
 }

@@ -59,9 +59,9 @@ public class Saver : MonoBehaviour
         
     }
 
-    private void Save()
+    public void Save()
     {
-#if UNITY_WEBGL
+#if UNITY_WEBGL&&!UNITY_EDITOR
         PlayerAccount.SetCloudSaveData(JsonUtility.ToJson(SaveData));
 #else
         PlayerPrefs.SetString("SaveData",JsonUtility.ToJson(SaveData));
@@ -70,7 +70,9 @@ public class Saver : MonoBehaviour
 
     private void Load()
     {
-#if UNITY_WEBGL
+#if UNITY_WEBGL&& !UNITY_EDITOR
+        Debug.Log("Authorized -"+PlayerAccount.IsAuthorized+"; HasPersonalProfileDataPermission-"+PlayerAccount.HasPersonalProfileDataPermission);
+        Debug.Log("Loading");
         PlayerAccount.GetCloudSaveData(onSuccessCallback: OnLoaded);
 #else
         if (PlayerPrefs.HasKey("SaveData"))
@@ -86,11 +88,12 @@ public class Saver : MonoBehaviour
 #endif
 
         Debug.Log("Load"+ SaveData.CoinValue);
-        Debug.Log("Load"+GetLastRewardDay());
+        Debug.Log("Load"+ GetLastRewardDay());
     }
 
     private void OnLoaded(string jsonData)
     {
+        Debug.Log("OnLoading");
         SaveData = JsonUtility.FromJson<SaveData>(jsonData);
         IsLoaded = true;
     }
@@ -104,6 +107,9 @@ public class SaveData
     [field: Preserve] public bool MusicChanged;
     [field: Preserve] public bool IsTrained;
     [field: Preserve] public string LastRewardedDay;
+    [field: Preserve] public int LastBet;
+    [field: Preserve] public int StartingGameCount;
+    [field: Preserve] public int CompleteGameCount;
 }
 
 

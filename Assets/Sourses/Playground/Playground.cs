@@ -22,10 +22,19 @@ public class Playground : MonoBehaviour
 
     private void StartGame()
     {
-        GameStarting?.Invoke();
-        _deckModel.CreateNew();
-        SpreadOutCardToColumns();
-        GameStarted?.Invoke();
+        if (PlayerData.Instance.TryRemoveCoins(Saver.Instance.SaveData.LastBet))
+        {
+            PlayerData.Instance.OnGameStarting();
+            GameStarting?.Invoke();
+            _deckModel.CreateNew();
+            SpreadOutCardToColumns();
+            GameStarted?.Invoke();
+        }
+        else
+        {
+            Debug.Log("Not enough money");
+        }
+        
     }
 
     private void RestartGame()
