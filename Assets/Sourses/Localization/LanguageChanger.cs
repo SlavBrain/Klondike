@@ -56,6 +56,7 @@ public class LanguageChanger : MonoBehaviour
         {
             LeanLocalization.SetCurrentLanguageAll(Languages.Russian.ToString());
             SetLanguageToggle(); 
+            Saver.Instance.SaveLanguage(Languages.Russian);
         }
     }
 
@@ -65,6 +66,7 @@ public class LanguageChanger : MonoBehaviour
         {
             LeanLocalization.SetCurrentLanguageAll(Languages.English.ToString());
             SetLanguageToggle();
+            Saver.Instance.SaveLanguage(Languages.English);
         }
     }
 
@@ -74,6 +76,7 @@ public class LanguageChanger : MonoBehaviour
         {
             LeanLocalization.SetCurrentLanguageAll(Languages.Turkish.ToString());
             SetLanguageToggle();
+            Saver.Instance.SaveLanguage(Languages.Turkish);
         }
     }
 

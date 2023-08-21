@@ -971,6 +971,7 @@ MonoBehaviour:
     LastBet: 0
     StartingGameCount: 0
     CompleteGameCount: 0
+    LastLanguage: 0
 --- !u!114 &440015023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4116,7 +4117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806f0696300aeac44a0e17efee222854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLanguage: English
+  currentLanguage: Turkish
   detectLanguage: 2
   defaultLanguage: 
   saveLoad: 1
@@ -5996,7 +5997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: Oyun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}
   m_sharedMaterial: {fileID: -918141074304758902, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}

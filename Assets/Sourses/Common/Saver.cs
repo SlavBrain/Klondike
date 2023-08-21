@@ -44,6 +44,12 @@ public class Saver : MonoBehaviour
         Save();
     }
 
+    public void SaveLanguage(Languages language)
+    {
+        SaveData.LastLanguage = language;
+        Save();
+    }
+
     public void SaveMusicSetting()
     {
         
@@ -110,6 +116,7 @@ public class SaveData
     [field: Preserve] public int LastBet;
     [field: Preserve] public int StartingGameCount;
     [field: Preserve] public int CompleteGameCount;
+    [field: Preserve] public Languages LastLanguage;
 }
 
 

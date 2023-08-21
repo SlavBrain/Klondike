@@ -8,26 +8,34 @@ public class AwakeLocalization : MonoBehaviour
 
         private void SetLanguageAll()
         {
-            switch (DefaultLanguage())
-            {
-                case "ru":
-                    LeanLocalization.SetCurrentLanguageAll(Languages.Russian.ToString());
-                    break;
-                case "en":
-                    LeanLocalization.SetCurrentLanguageAll(Languages.English.ToString());
-                    break;
-                case "tr":
-                    LeanLocalization.SetCurrentLanguageAll(Languages.Turkish.ToString());
-                    break;
-            }
+            LeanLocalization.SetCurrentLanguageAll(DefaultLanguage().ToString());
         }
 
-        private string DefaultLanguage()
+        private Languages DefaultLanguage()
         {
+            Debug.Log(Saver.Instance.SaveData.LastLanguage);
+            if (Saver.Instance.SaveData.LastLanguage == Languages.None)
+            {
 #if UNITY_WEBGL && !UNITY_EDITOR
-            return YandexGamesSdk.Environment.i18n.lang;
+            switch(YandexGamesSdk.Environment.i18n.lang)
+            {
+                case "ru":
+                    return Languages.Russian;
+                    break;
+                case "en":
+                    return Languages.English;
+                    break;
+                case "tr":
+                    return Languages.Turkish;
+                    break;
+            }
 #else
-            return "ru";
+            return Languages.Russian;
 #endif
+            }
+            else
+            {
+                return Saver.Instance.SaveData.LastLanguage;
+            }
         }
 }
