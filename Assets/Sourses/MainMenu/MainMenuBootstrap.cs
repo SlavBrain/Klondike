@@ -8,11 +8,13 @@ public class MainMenuBootstrap : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Rewarder _rewarder;
     [SerializeField] private Saver _saver;
+    [SerializeField] private SoundController _soundController;
 
     private void Awake()
     {
         _saver.Initialize();
         _playerData.Initialize();
+        _soundController.Initialize();
         _mainMenuPanel.Initialize();
         _settingMenu.Initialize();
         _leaderboardMenu.Initialize();

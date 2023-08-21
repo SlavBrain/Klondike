@@ -50,19 +50,10 @@ public class Saver : MonoBehaviour
         Save();
     }
 
-    public void SaveMusicSetting()
+    public void SaveSoundMute(bool value)
     {
-        
-    }
-
-    public void GetSavedMusicSetting()
-    {
-        
-    }
-
-    public void EndTraining()
-    {
-        
+        SaveData.IsSoundOn = value;
+        Save();
     }
 
     public void Save()
@@ -109,8 +100,7 @@ public class Saver : MonoBehaviour
 public class SaveData
 {
     [field: Preserve] public int CoinValue;
-    [field: Preserve] public float MusicVolumeValue;
-    [field: Preserve] public bool MusicChanged;
+    [field: Preserve] public bool IsSoundOn;
     [field: Preserve] public bool IsTrained;
     [field: Preserve] public string LastRewardedDay;
     [field: Preserve] public int LastBet;

@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 public class SettingMenu : MonoBehaviour
 {
-    [SerializeField] private Toggle _soundToggle;
+    [SerializeField] private SoundMuteChanger _muteChanger;
 
     public void Initialize()
     {
-        //_soundToggle.isOn = Saver.Instance.SaveData.MusicChanged;
+        _muteChanger.Initialize();
     }
     
     public void Enable() => gameObject.SetActive(true);

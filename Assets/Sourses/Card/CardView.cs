@@ -95,7 +95,8 @@ public class CardView : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position,tempNewPositionForMoving,_movingSpeed*Time.deltaTime);
             yield return null;
         }
-
+        
+        SoundController.Instance.PlayCardMovement();
         transform.SetParent(newParent.gameObject.transform);
         transform.position = _newPosition;
         cardPlaceView.OnTakedCard(this.Model);
@@ -113,7 +114,8 @@ public class CardView : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position,tempPosition,_movingSpeed*Time.deltaTime);
             yield return null;
         }
-
+        
+        SoundController.Instance.PlayCardMovement();
         yield return new WaitForSeconds(0.3f);
         
         while (Vector3.Distance(transform.position,oldPosition)!>0.01f)
@@ -121,5 +123,7 @@ public class CardView : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position,oldPosition,_movingSpeed*Time.deltaTime);
             yield return null;
         }
+        
+        SoundController.Instance.PlayCardMovement();
     }
 }
