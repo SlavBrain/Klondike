@@ -9,7 +9,7 @@ public class ColumnView : CardPlaceView
     {
         if (_cards.Count > 1)
         {
-            return transform.position +_defaultOffset+ Offset * _cards.Count;
+            return _cards[^1].transform.position+Offset;
         }
         else
         {
