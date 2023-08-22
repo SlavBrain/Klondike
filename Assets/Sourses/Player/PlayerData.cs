@@ -54,7 +54,7 @@ public class PlayerData : MonoBehaviour
 
     public bool HaveEnoughMoney(int value)
     {
-        return value < _coinValue;
+        return value <= _coinValue;
     }
 
     public bool TryRemoveCoins(int removingValue)
@@ -65,6 +65,11 @@ public class PlayerData : MonoBehaviour
             ChangedValue?.Invoke();
             Saver.Instance.SavePlayerData();
             RefreshCoinLeaderboard();
+            return true;
+        }
+
+        if (removingValue == 0)
+        {
             return true;
         }
 

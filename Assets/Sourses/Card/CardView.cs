@@ -97,8 +97,10 @@ public class CardView : MonoBehaviour
         }
         
         SoundController.Instance.PlayCardMovement();
-        transform.SetParent(newParent.gameObject.transform);
+        
         transform.position = _newPosition;
+        transform.SetParent(newParent.gameObject.transform);
+        Debug.Log(gameObject.name+" "+_newPosition+" "+ transform.position);
         cardPlaceView.OnTakedCard(this.Model);
     }
 

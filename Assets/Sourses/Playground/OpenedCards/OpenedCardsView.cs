@@ -7,7 +7,7 @@ public class OpenedCardsView : CardPlaceView
         
     public override Vector3 GetNextCardPosition()
     {
-        return transform.position + Offset * _cards.Count;
+        return transform.position+_defaultOffset + Offset * _cards.Count;
     }
 
     public override void OnTakedCard(CardModel card)

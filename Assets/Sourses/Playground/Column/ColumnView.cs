@@ -9,11 +9,11 @@ public class ColumnView : CardPlaceView
     {
         if (_cards.Count > 1)
         {
-            return transform.position + Offset * (_cards.Count-1);
+            return transform.position +_defaultOffset+ Offset * _cards.Count;
         }
         else
         {
-            return base.GetNextCardPosition()+new Vector3(0,0,-0.05f);
+            return base.GetNextCardPosition()+_defaultOffset;
         }
         
     }
@@ -37,7 +37,7 @@ public class ColumnView : CardPlaceView
         
         for (int i = 0; i < _cards.Count; i++)
         {
-            _cards[i].MoveToDot(transform.position + _currentOffset * i);
+            _cards[i].MoveToDot(transform.position+_defaultOffset + _currentOffset * i);
             
             if (i == 0)
             {

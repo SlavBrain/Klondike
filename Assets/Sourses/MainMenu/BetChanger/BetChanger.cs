@@ -10,7 +10,7 @@ public class BetChanger : MonoBehaviour
     
     
     private int _currentBetNumber;
-    private int[] _betVariables = new[] { 10, 20, 50, 100, 250 , 1000, 2500, 10000};
+    private int[] _betVariables = new[] {0, 10, 20, 50, 100, 250 , 1000, 2500, 10000};
     private bool _isMaxValue => _currentBetNumber == _betVariables.Length - 1;
     private bool _isMinValue => _currentBetNumber == 0;
 

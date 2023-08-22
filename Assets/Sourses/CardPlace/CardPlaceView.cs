@@ -5,6 +5,7 @@ public abstract class CardPlaceView : MonoBehaviour
 {
     [SerializeField] protected List<CardView> _cards;
     
+    protected Vector3 _defaultOffset = new Vector3(0, 0, -0.5f);
     protected CardPlaceModel CardPlaceModel;
     protected virtual Vector3 Offset { get; }= Vector3.zero;
     private bool _isSignedToModel;
@@ -36,7 +37,7 @@ public abstract class CardPlaceView : MonoBehaviour
 
     public virtual Vector3 GetNextCardPosition()
     {
-        return transform.position;
+        return transform.position+_defaultOffset;
     }
 
     public virtual Transform GetNextCardParent()

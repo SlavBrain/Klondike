@@ -13,7 +13,6 @@ public class AwakeLocalization : MonoBehaviour
 
         private Languages DefaultLanguage()
         {
-            Debug.Log(Saver.Instance.SaveData.LastLanguage);
             if (Saver.Instance.SaveData.LastLanguage == Languages.None)
             {
 #if UNITY_WEBGL && !UNITY_EDITOR
