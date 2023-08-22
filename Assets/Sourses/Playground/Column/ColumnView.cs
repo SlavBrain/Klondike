@@ -47,9 +47,17 @@ public class ColumnView : CardPlaceView
             {
                 _cards[i].transform.parent = _cards[i-1].transform;
             }
-            
         }
+    }
+
+    protected void OnModelReset()
+    {
+        Debug.Log("StartReset"+gameObject.name);
         
+        Destroy(_cards[0].gameObject);
+
+        _cards.Clear();
+        Debug.Log("EndReset"+gameObject.name);
     }
 
     private void RecalculateOffset()

@@ -41,6 +41,7 @@ public class EntryPoint : MonoBehaviour
         
         InitializePlayground();
         
+        InitializeCardTransferController();
         InitializeGameMovesLogger();
         InitializeMoveCanceler();
         InitializeEndGameInspector();
@@ -89,6 +90,11 @@ public class EntryPoint : MonoBehaviour
     private void InitializePlayground()
     {
         _playground.Initialize(_deckModel,_columnModels,_startButton,_restartButton);
+    }
+
+    private void InitializeCardTransferController()
+    {
+        _cardTransferController.Initialize(_playground);
     }
 
     private void InitializeGameMovesLogger()

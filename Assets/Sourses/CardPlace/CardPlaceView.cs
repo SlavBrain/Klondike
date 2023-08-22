@@ -77,14 +77,22 @@ public abstract class CardPlaceView : MonoBehaviour
         _cards.Remove(cardModel.View);
     }
 
-    private void OnModelReset()
+    protected void OnModelReset()
     {
+        Debug.Log("StartReset"+gameObject.name);
+        
+        foreach(CardView card in _cards)
+        {
+            card.StopMoving();
+        }
+        
         foreach(CardView card in _cards)
         {
             Destroy(card.gameObject);
         }
 
         _cards.Clear();
+        Debug.Log("EndReset"+gameObject.name);
     }
 
     protected virtual void Refresh()

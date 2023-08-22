@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardTransferController : MonoBehaviour
@@ -7,9 +9,24 @@ public class CardTransferController : MonoBehaviour
     private Queue<CardTransfer> _cardTransfers=new Queue<CardTransfer>();
     private bool _isLaunching = false;
     private readonly float _launchingDelay = 0.1f;
-
+    private Playground _playground;
     private Coroutine _launchingTransfers;
+
+    public void Initialize(Playground playground)
+    {
+        _playground = playground;
+        _playground.GameStarting += ClearQueue;
+    }
     
+    private void ClearQueue()
+    {
+        if (_launchingTransfers != null)
+        {
+            StopCoroutine(_launchingTransfers);
+        }
+        _cardTransfers.Clear();
+    }
+
     public void AddTransfer(CardModel cardModel, CardPlaceModel cardPlaceModel)
     {
         _cardTransfers.Enqueue(new CardTransfer(cardModel,cardPlaceModel));

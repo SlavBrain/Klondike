@@ -48,7 +48,6 @@ public class AutoFiller
     {
         while (!IsAllDumpsFilled())
         {
-            
             FillAvailable();
             
             if (_deckModel.Cards.Count == 0)
@@ -61,11 +60,8 @@ public class AutoFiller
     
     private void FillAvailable()
     {
-        Debug.Log("FillAvailable");
         while (_moveFinder.TryFindMoveToDump(out CardModel cardModel, out CardPlaceModel cardPlaceModel))
         {
-            Debug.Log(cardModel.View.gameObject.name);
-            Debug.Log(cardPlaceModel.View.gameObject.name);
             cardPlaceModel.TryTakeCard(cardModel);
         }
     }

@@ -24,6 +24,7 @@ public class Playground : MonoBehaviour
     {
         if (PlayerData.Instance.TryRemoveCoins(Saver.Instance.SaveData.LastBet))
         {
+            Debug.Log("Starting");
             PlayerData.Instance.OnGameStarting();
             GameStarting?.Invoke();
             _deckModel.CreateNew();
@@ -34,7 +35,6 @@ public class Playground : MonoBehaviour
         {
             Debug.Log("Not enough money");
         }
-        
     }
 
     private void RestartGame()

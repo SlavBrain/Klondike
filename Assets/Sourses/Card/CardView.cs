@@ -21,6 +21,7 @@ public class CardView : MonoBehaviour
 
     public void OnDestroy()
     {
+        
         _modelModel.ChangedOpenState -= Refresh;
         _modelModel.ChangedPermissionDragging -= OnChangedDraggingPermission;
     }
@@ -33,6 +34,14 @@ public class CardView : MonoBehaviour
         Refresh();
         _modelModel.ChangedOpenState += Refresh;
         _modelModel.ChangedPermissionDragging += OnChangedDraggingPermission;
+    }
+
+    public void StopMoving()
+    {
+        if (_moving != null)
+        {
+            StopCoroutine(_moving);
+        }
     }
     
     public void MoveToNewPlace(CardPlaceView cardPlaceView, Transform newParent)
@@ -99,8 +108,12 @@ public class CardView : MonoBehaviour
         SoundController.Instance.PlayCardMovement();
         
         transform.position = _newPosition;
-        transform.SetParent(newParent.gameObject.transform);
-        Debug.Log(gameObject.name+" "+_newPosition+" "+ transform.position);
+        
+        if (newParent.gameObject!= null)
+        {
+            transform.SetParent(newParent.gameObject.transform);
+        }
+        
         cardPlaceView.OnTakedCard(this.Model);
     }
 

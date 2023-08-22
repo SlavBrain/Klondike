@@ -9,15 +9,18 @@ public class DeckView : CardPlaceView
 
     public void OnOpenCardButtonClick()
     {
-        if (_cards.Count > 0)
+        if (_cards.Count == CardPlaceModel.Cards.Count)
         {
-            CardPlaceModel.TryGiveTopCard(_openedCardsView.Model);
+            if (_cards.Count > 0)
+            {
+                CardPlaceModel.TryGiveTopCard(_openedCardsView.Model);
+            }
+            else
+            {
+                DeckModel deckModel = CardPlaceModel as DeckModel;
+                deckModel.TakeAllCard(_openedCardsView.Model as OpenedCardsModel);
+            }
         }
-        else
-        {
-            DeckModel deckModel = CardPlaceModel as DeckModel;
-            deckModel.TakeAllCard(_openedCardsView.Model as OpenedCardsModel);
-        }        
     }
     
     protected override void SignToModelAction()
