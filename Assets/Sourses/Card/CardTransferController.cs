@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CardTransferController : MonoBehaviour
 {
+    [SerializeField] private Panel _blockPanel;
     private Queue<CardTransfer> _cardTransfers=new Queue<CardTransfer>();
     private bool _isLaunching = false;
     private readonly float _launchingDelay = 0.1f;
@@ -42,6 +43,8 @@ public class CardTransferController : MonoBehaviour
 
     private IEnumerator LaunchingTransferCards()
     {
+        _blockPanel.Enable();
+        
         _isLaunching = true;
         WaitForSeconds delay = new WaitForSeconds(_launchingDelay);
 
@@ -52,6 +55,8 @@ public class CardTransferController : MonoBehaviour
         }
 
         _isLaunching = false;
+        
+        _blockPanel.Disable();
     }
 }
 
