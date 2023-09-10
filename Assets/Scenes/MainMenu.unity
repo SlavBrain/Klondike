@@ -331,8 +331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaa0f7f1eb5ec54ab8ccc5aec4a2949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dailyReward: 0
-  _videoReward: 0
+  _dailyReward: 100
+  _videoReward: 50
 --- !u!4 &66071679
 Transform:
   m_ObjectHideFlags: 0

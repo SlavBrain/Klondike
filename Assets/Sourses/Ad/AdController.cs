@@ -24,6 +24,7 @@ public class AdController : MonoBehaviour
     public void ShowVideoAd(Action onRewardedCallback = null)
     {
 #if UNITY_WEBGL&&!UNITY_EDITOR
+        Debug.Log("ShowingVideoAd");
         VideoAd.Show(onRewardedCallback: onRewardedCallback,onOpenCallback:OnAdStarting,onCloseCallback:OnAdEnded);
 #else
         Debug.Log("ShowingVideoAd");
