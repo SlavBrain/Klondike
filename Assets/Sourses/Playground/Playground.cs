@@ -24,6 +24,7 @@ public class Playground : MonoBehaviour
     {
         if (PlayerData.Instance.TryRemoveCoins(Saver.Instance.SaveData.LastBet))
         {
+            InterstitialCounter.Instance.Increment();
             PlayerData.Instance.OnGameStarting();
             GameStarting?.Invoke();
             _deckModel.CreateNew();

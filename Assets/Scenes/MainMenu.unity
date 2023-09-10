@@ -302,6 +302,52 @@ MonoBehaviour:
   _russianToggle: {fileID: 477133440}
   _englishToggle: {fileID: 1596999068}
   _turkishToggle: {fileID: 815817934}
+--- !u!1 &66071677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66071679}
+  - component: {fileID: 66071678}
+  m_Layer: 0
+  m_Name: Rewarder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &66071678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66071677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aaa0f7f1eb5ec54ab8ccc5aec4a2949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dailyReward: 0
+  _videoReward: 0
+--- !u!4 &66071679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66071677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1615.1494, y: 721.50574, z: -8.116696}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &114240240
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,7 +1037,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &430018080
 GameObject:
@@ -1026,9 +1072,10 @@ MonoBehaviour:
   _settingMenu: {fileID: 234067564}
   _leaderboardMenu: {fileID: 633311188}
   _playerData: {fileID: 440015020}
-  _rewarder: {fileID: 440015023}
+  _rewarder: {fileID: 66071678}
   _saver: {fileID: 440015022}
   _soundController: {fileID: 404616006}
+  _adController: {fileID: 905178018}
 --- !u!4 &430018082
 Transform:
   m_ObjectHideFlags: 0
@@ -1431,7 +1478,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 508615082}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 66071678}
+        m_TargetAssemblyTypeName: Rewarder, Assembly-CSharp
+        m_MethodName: OnVideoRewardButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &508615082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2824,7 +2883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translationName: Sound
   FallbackText: Sound
---- !u!1 &994743188
+--- !u!1 &905178017
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2832,44 +2891,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 994743190}
-  - component: {fileID: 994743189}
+  - component: {fileID: 905178019}
+  - component: {fileID: 905178018}
   m_Layer: 0
-  m_Name: Temp
+  m_Name: AdController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &994743189
+--- !u!114 &905178018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994743188}
+  m_GameObject: {fileID: 905178017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2b2ee8377e07d428bf8731b324c9bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 35a6f6594c6d6ba4994eeded95f5cc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinValue: 0
-  _startingGameCount: 0
-  _successEndedGameCount: 0
---- !u!4 &994743190
+--- !u!4 &905178019
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994743188}
+  m_GameObject: {fileID: 905178017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1014.19196, y: 567.75214, z: 9734.85}
+  m_LocalPosition: {x: 1615.1494, y: 721.50574, z: -8.116696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005682828
 GameObject:

@@ -12,7 +12,12 @@ public class Rewarder : MonoBehaviour
         TryGiveDailyReward();
     }
 
-    public void GiveVideoReward()
+    public void OnVideoRewardButtonClick()
+    {
+        AdController.Instance.ShowVideoAd();
+    }
+
+    private void GiveVideoReward()
     {
         PlayerData.Instance.AddCoins(_videoReward);
     }

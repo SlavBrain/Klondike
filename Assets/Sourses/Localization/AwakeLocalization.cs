@@ -36,5 +36,7 @@ public class AwakeLocalization : MonoBehaviour
             {
                 return Saver.Instance.SaveData.LastLanguage;
             }
+            
+            return Languages.Russian;
         }
 }

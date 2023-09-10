@@ -9,6 +9,7 @@ public class MainMenuBootstrap : MonoBehaviour
     [SerializeField] private Rewarder _rewarder;
     [SerializeField] private Saver _saver;
     [SerializeField] private SoundController _soundController;
+    [SerializeField] private AdController _adController;
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class MainMenuBootstrap : MonoBehaviour
         _mainMenuPanel.Initialize();
         _settingMenu.Initialize();
         _leaderboardMenu.Initialize();
+        _adController.Initialize();
         _rewarder.Initialize();
     }
 }

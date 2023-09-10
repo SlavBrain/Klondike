@@ -32,4 +32,6 @@ public class SoundController : MonoBehaviour
     }
 
     public void SetSoundOn(bool value) => _audioSource.mute = !value;
+    public void Mute() => _audioSource.Pause();
+    public void UnMute() => _audioSource.UnPause();
 }
