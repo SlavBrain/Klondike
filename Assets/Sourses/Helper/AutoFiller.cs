@@ -1,15 +1,18 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoFiller
+public class AutoFiller:MonoBehaviour
 {
     private MoveFinder _moveFinder;
     private DeckModel _deckModel;
     private List<ColumnModel> _columnModels;
     private List<DumpModel> _dumpModels;
     private OpenedCardsModel _openedCardsModel;
-
-    public AutoFiller(InputController inputController,MoveFinder moveFinder, DeckModel deckModel, List<ColumnModel> columnModels,
+    private bool IsAutoFillingActive = false;
+    private Coroutine _autoFilling;
+    
+    public void Initialize(InputController inputController,MoveFinder moveFinder, DeckModel deckModel, List<ColumnModel> columnModels,
         OpenedCardsModel openedCardsModel,List<DumpModel> dumpModels)
     {
         _moveFinder = moveFinder;
@@ -46,17 +49,16 @@ public class AutoFiller
     
     private void FillAll()
     {
-        while (!IsAllDumpsFilled())
+        Debug.Log("StartFillingAll");
+        if(IsAutoFillingActive)
+            return;
+        
+        if (_autoFilling != null)
         {
-            
-            FillAvailable();
-            
-            if (_deckModel.Cards.Count == 0)
-            {
-                DeckView deckView = (DeckView)_deckModel.View;
-                deckView.OnOpenCardButtonClick();
-            }
+            StopCoroutine(_autoFilling);
         }
+
+        _autoFilling = StartCoroutine(AutoFilling());
     }
     
     private void FillAvailable()
@@ -87,10 +89,12 @@ public class AutoFiller
         {
             if (!columnModel.IsAllCardOpened)
             {
+                Debug.Log("Not all card opened");
                 return false;
             }
         }
-
+        
+        Debug.Log("all card opened");
         return true;
     }
 
@@ -105,5 +109,26 @@ public class AutoFiller
         }
 
         return true;
+    }
+
+    private IEnumerator AutoFilling()
+    {
+        IsAutoFillingActive = true;
+        
+        while (!IsAllDumpsFilled())
+        {
+            
+            FillAvailable();
+            
+            if (_deckModel.Cards.Count == 0)
+            {
+                DeckView deckView = (DeckView)_deckModel.View;
+                deckView.OnOpenCardButtonClick();
+            }
+
+            yield return null;
+        }
+
+        IsAutoFillingActive = false;
     }
 }

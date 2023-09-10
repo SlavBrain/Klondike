@@ -31,7 +31,7 @@ public class EntryPoint : MonoBehaviour
     private EndGameInspector _endGameInspector;
 
     private MoveFinder _moveFinder;
-    private AutoFiller _autoFiller;
+    [SerializeField]private AutoFiller _autoFiller;
     
     private void OnEnable()
     {
@@ -119,7 +119,7 @@ public class EntryPoint : MonoBehaviour
 
     private void InitializeAutoFiller()
     {
-        _autoFiller = new AutoFiller(_inputController, _moveFinder, _deckModel, _columnModels, _openedCardsModel,_dumpModels);
+        _autoFiller.Initialize(_inputController, _moveFinder, _deckModel, _columnModels, _openedCardsModel,_dumpModels);
     }
 
     private void BindButtons()

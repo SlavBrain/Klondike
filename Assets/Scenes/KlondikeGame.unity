@@ -8637,6 +8637,7 @@ MonoBehaviour:
   - {fileID: 105269926}
   - {fileID: 776454971}
   - {fileID: 1397853231}
+  _autoFiller: {fileID: 2051765200}
 --- !u!4 &1500511348
 Transform:
   m_ObjectHideFlags: 0
@@ -9318,6 +9319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2051765199}
   - component: {fileID: 2051765198}
+  - component: {fileID: 2051765200}
   m_Layer: 0
   m_Name: Playground
   m_TagString: Untagged
@@ -9356,3 +9358,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2051765200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051765197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7049368f5ed97047ad9de1a41b656ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
