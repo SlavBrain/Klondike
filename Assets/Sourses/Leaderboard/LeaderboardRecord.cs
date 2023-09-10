@@ -12,7 +12,15 @@ public class LeaderboardRecord : MonoBehaviour
 
     public void Initialization(string playerName, int score, int rank)
     {
-        _nick.text = playerName;
+        if (!string.IsNullOrEmpty(playerName))
+        {
+            _nick.text = playerName;
+        }
+        else
+        {
+            _nick.text = playerName;
+        }
+        
         _score.text = score.ToString();
         _rank.text = rank.ToString();
     }
