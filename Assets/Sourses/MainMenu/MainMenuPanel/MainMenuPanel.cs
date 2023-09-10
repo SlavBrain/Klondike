@@ -16,6 +16,7 @@ public class MainMenuPanel : MonoBehaviour
     [SerializeField] private BetChanger _betChanger;
     [SerializeField] private TMP_Text _nicknameLabel;
     [SerializeField] private TMP_Text _playerWalletValueText;
+    [SerializeField] private MessagePanel _notEnoughCoinsPanel;
 
     [SerializeField] private LeaderboardView _leaderboardMenu;
     [SerializeField] private SettingMenu _settingMenu;
@@ -63,7 +64,7 @@ public class MainMenuPanel : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not enough money");
+                _notEnoughCoinsPanel.gameObject.SetActive(true);
             }
         }
         else if(_betChanger.CurrentBet==0)

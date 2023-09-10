@@ -10,6 +10,7 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private Button _cancelMoveButton;
     [SerializeField] private Button _findMovesButton;
     [SerializeField] private Button _backToMenuButton;
+    [SerializeField] private MessagePanel _notEnoughCoinsPanel;
     [SerializeField] private EndingGameController _endingGameController;
     [SerializeField] private InputController _inputController;
     [SerializeField] private CardTransferController _cardTransferController;
@@ -88,7 +89,7 @@ public class EntryPoint : MonoBehaviour
 
     private void InitializePlayground()
     {
-        _playground.Initialize(_deckModel,_columnModels,_startButton,_restartButton);
+        _playground.Initialize(_deckModel,_columnModels,_startButton,_restartButton,_notEnoughCoinsPanel);
     }
 
     private void InitializeGameMovesLogger()

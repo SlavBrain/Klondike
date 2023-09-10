@@ -8,14 +8,16 @@ public class Playground : MonoBehaviour
 
     private DeckModel _deckModel;
     private List<ColumnModel> _columnModel;
+    private MessagePanel _notEnoughCoinsPanel;
 
     public event Action GameStarting;
     public event Action GameStarted;
 
-    public void Initialize(DeckModel deckModel,List<ColumnModel> columnModels, Button startButton, Button restartButton)
+    public void Initialize(DeckModel deckModel,List<ColumnModel> columnModels, Button startButton, Button restartButton,MessagePanel notEnoughCoinsPanel)
     {
         _deckModel = deckModel;
         _columnModel = columnModels;
+        _notEnoughCoinsPanel = notEnoughCoinsPanel;
         startButton.onClick.AddListener(StartGame);
         restartButton.onClick.AddListener(RestartGame);
     }
@@ -33,7 +35,7 @@ public class Playground : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough money");
+            _notEnoughCoinsPanel.gameObject.SetActive(true);
         }
         
     }
