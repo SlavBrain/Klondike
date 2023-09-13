@@ -15,7 +15,7 @@ public class EndingGameController : MonoBehaviour
 
     private void StartEndingGameActions()
     {
-        Debug.Log("StartEnding");
+        PlayerData.Instance.AddCoins(Saver.Instance.SaveData.LastBet*2);
         _particleSystem.Play();
     }
 
