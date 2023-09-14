@@ -46,13 +46,17 @@ public abstract class CardPlaceModel
 
     public bool TryTakeCard(CardModel cardModel)
     {
+        Debug.Log("15)StartFillingAll");
         if (IsCardCanBeAdded(cardModel))
         {
+            Debug.Log("16)StartFillingAll");
+            Debug.Log(cardModel.View.GetComponentInParent<CardPlaceView>().gameObject.name);
             RequiredCard(cardModel.View.GetComponentInParent<CardPlaceView>().Model, cardModel);
             return true;
         }
         else
         {
+            Debug.Log("17)StartFillingAll");
             return false;
         }
     }
@@ -77,27 +81,45 @@ public abstract class CardPlaceModel
     
     private void RequiredCard(CardPlaceModel cardPlaceModel,CardModel cardModel)
     {
+        Debug.Log("18)StartFillingAll");
         cardPlaceModel.GiveCardsMove(this,cardModel);
     }
     
     protected virtual void GiveCardsMove(CardPlaceModel cardPlaceModel,CardModel cardModel)
     {
+        Debug.Log("19)StartFillingAll");
         List<CardModel> giftingCards = new List<CardModel>();
-
+        Debug.Log("20)StartFillingAll");
         int cardPosition = _cards.FindIndex(card=>card==cardModel);
 
+        Debug.Log("21)StartFillingAll");
         while(_cards.Count>cardPosition)
         {
+            Debug.Log("22)StartFillingAll");
+            Debug.Log(_cards.Count+" "+cardPosition);
+            if (this is DeckModel)
+            {
+                Debug.Log("DeckModel");
+            }
+
+            if (this is OpenedCardsModel)
+            {
+                Debug.Log("DeckModel");
+            }
+            
             giftingCards.Add(_cards[cardPosition]);
+            Debug.Log("23)StartFillingAll");
             GiveCard(cardPlaceModel,_cards[cardPosition]);
         }
         
+        Debug.Log("24)StartFillingAll");
         InvokeGaveCardsMoveAction(this,cardPlaceModel,giftingCards);
     }
 
     protected void InvokeGaveCardsMoveAction(CardPlaceModel oldPlaceModel, CardPlaceModel newPlaceModel,
         List<CardModel> cardModelList)
     {
+        Debug.Log("25)StartFillingAll");
         GaveCardsMove?.Invoke(oldPlaceModel,newPlaceModel,cardModelList);
     }
 }

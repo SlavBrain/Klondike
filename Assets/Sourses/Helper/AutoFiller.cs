@@ -127,7 +127,7 @@ public class AutoFiller:MonoBehaviour
             FillAvailable();
             Debug.Log("8)StartFillingAll");
             
-            if (_deckModel.Cards.Count != 0)
+            if (_deckModel.Cards.Count != 0||_openedCardsModel.Cards.Count!=0)
             {
                 Debug.Log("9)StartFillingAll");
                 
