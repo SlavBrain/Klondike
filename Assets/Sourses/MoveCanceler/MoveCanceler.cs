@@ -35,7 +35,6 @@ public class MoveCanceler
                 break;
             default:
                 throw new Exception("Try cancel unregistered change");
-                break;
         }
     }
 

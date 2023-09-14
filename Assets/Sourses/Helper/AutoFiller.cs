@@ -49,15 +49,16 @@ public class AutoFiller:MonoBehaviour
     
     private void FillAll()
     {
-        Debug.Log("StartFillingAll");
+        Debug.Log("1)StartFillingAll");
         if(IsAutoFillingActive)
             return;
-        
+        Debug.Log("2)StartFillingAll");
         if (_autoFilling != null)
         {
+            Debug.Log("3)StartFillingAll");
             StopCoroutine(_autoFilling);
         }
-
+        Debug.Log("4)StartFillingAll");
         _autoFilling = StartCoroutine(AutoFilling());
     }
     
@@ -113,22 +114,37 @@ public class AutoFiller:MonoBehaviour
 
     private IEnumerator AutoFilling()
     {
+        int errorCounter = 0;
+        int maxIteration=52;
+        Debug.Log("5)StartFillingAll");
         IsAutoFillingActive = true;
+        Debug.Log("6)StartFillingAll");
         
-        while (!IsAllDumpsFilled())
+        while (!IsAllDumpsFilled()&&errorCounter<maxIteration)
         {
+            Debug.Log("7)StartFillingAll");
             
             FillAvailable();
+            Debug.Log("8)StartFillingAll");
             
-            if (_deckModel.Cards.Count == 0)
+            if (_deckModel.Cards.Count != 0)
             {
+                Debug.Log("9)StartFillingAll");
+                
                 DeckView deckView = (DeckView)_deckModel.View;
+                
+                Debug.Log("10)StartFillingAll");
+                
                 deckView.OnOpenCardButtonClick();
             }
 
+            Debug.Log("11)StartFillingAll");
+            errorCounter++;
             yield return null;
         }
-
+        
+        Debug.Log("12)StartFillingAll");
+        
         IsAutoFillingActive = false;
     }
 }
