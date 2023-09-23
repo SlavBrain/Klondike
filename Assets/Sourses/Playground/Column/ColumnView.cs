@@ -7,7 +7,7 @@ public class ColumnView : CardPlaceView
     
     public override Vector3 GetNextCardPosition()
     {
-        if (_cards.Count > 1)
+        if (_cards.Count > 0)
         {
             return _cards[^1].transform.position+Offset;
         }
