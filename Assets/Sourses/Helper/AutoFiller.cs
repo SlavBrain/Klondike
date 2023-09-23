@@ -39,7 +39,9 @@ public class AutoFiller:MonoBehaviour
     {
         if (IsAllCardInColumnOpened())
         {
-            FillAll();
+            FillAvailable();
+            //Need Find bug about negative card position in Deck( then opening card from deck)
+            //FillAll();
         }
         else
         {
@@ -49,26 +51,21 @@ public class AutoFiller:MonoBehaviour
     
     private void FillAll()
     {
-        Debug.Log("1)StartFillingAll");
         if(IsAutoFillingActive)
             return;
-        Debug.Log("2)StartFillingAll");
+        
         if (_autoFilling != null)
         {
-            Debug.Log("3)StartFillingAll");
             StopCoroutine(_autoFilling);
         }
-        Debug.Log("4)StartFillingAll");
+        
         _autoFilling = StartCoroutine(AutoFilling());
     }
     
     private void FillAvailable()
     {
-        Debug.Log("FillAvailable");
         while (_moveFinder.TryFindMoveToDump(out CardModel cardModel, out CardPlaceModel cardPlaceModel))
         {
-            Debug.Log(cardModel.View.gameObject.name);
-            Debug.Log(cardPlaceModel.View.gameObject.name);
             cardPlaceModel.TryTakeCard(cardModel);
         }
     }
@@ -90,12 +87,10 @@ public class AutoFiller:MonoBehaviour
         {
             if (!columnModel.IsAllCardOpened)
             {
-                Debug.Log("Not all card opened");
                 return false;
             }
         }
         
-        Debug.Log("all card opened");
         return true;
     }
 
@@ -116,34 +111,21 @@ public class AutoFiller:MonoBehaviour
     {
         int errorCounter = 0;
         int maxIteration=52;
-        Debug.Log("5)StartFillingAll");
         IsAutoFillingActive = true;
-        Debug.Log("6)StartFillingAll");
         
         while (!IsAllDumpsFilled()&&errorCounter<maxIteration)
         {
-            Debug.Log("7)StartFillingAll");
-            
             FillAvailable();
-            Debug.Log("8)StartFillingAll");
             
             if (_deckModel.Cards.Count != 0||_openedCardsModel.Cards.Count!=0)
             {
-                Debug.Log("9)StartFillingAll");
-                
                 DeckView deckView = (DeckView)_deckModel.View;
-                
-                Debug.Log("10)StartFillingAll");
-                
                 deckView.OnOpenCardButtonClick();
             }
-
-            Debug.Log("11)StartFillingAll");
+            
             errorCounter++;
             yield return null;
         }
-        
-        Debug.Log("12)StartFillingAll");
         
         IsAutoFillingActive = false;
     }

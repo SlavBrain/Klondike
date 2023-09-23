@@ -18,11 +18,9 @@ public class MoveFinder
 
     public void OnHelpInvoke()
     {
-        Debug.Log("Help Invoke");
         if (TryFindAvailableMoves(out CardModel cardModel, out CardPlaceModel cardPlaceModel))
         {
             cardModel.View.MoveBoomerang(cardPlaceModel.View);
-            Debug.Log("Card "+cardModel.Rang+" "+cardModel.Suit+";Column "+cardPlaceModel.View.name);
         }
         else
         {
@@ -100,7 +98,6 @@ public class MoveFinder
                                 cardPlaceModel = _columnModels[j];
                                 return true;
                             }
-
                     }
                 }
             }

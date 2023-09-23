@@ -11,12 +11,10 @@ public class DeckView : CardPlaceView
     {
         if (_cards.Count > 0)
         {
-            Debug.Log("13)StartFillingAll");
             CardPlaceModel.TryGiveTopCard(_openedCardsView.Model);
         }
         else
         {
-            Debug.Log("14)StartFillingAll");
             DeckModel deckModel = CardPlaceModel as DeckModel;
             deckModel.TakeAllCard(_openedCardsView.Model as OpenedCardsModel);
         }        
