@@ -101,6 +101,7 @@ public class SaveData
 {
     [field: Preserve] public int CoinValue;
     [field: Preserve] public bool IsSoundOn;
+    [field: Preserve] public bool IsMusicOn;
     [field: Preserve] public bool IsTrained;
     [field: Preserve] public string LastRewardedDay;
     [field: Preserve] public int LastBet;

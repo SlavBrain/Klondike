@@ -32,34 +32,37 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Plugins/CW/LeanLocalization/Examples/_01_Localization.unity
     guid: e86b2aa8fd0757144a4a9af79c24e5e9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_09_CSV.unity
     guid: 30fce5dbbda6e8e46a2df551b14072ed
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_08____Local_Token.unity
     guid: acf4489a077d45c42ae8604855225bf0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_12_Dropdown.unity
     guid: f7491c2f588224846b083edd143b0ec2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_06_Renderer.unity
     guid: fb1cbe517dd7d744f8780a1ad5cfa4c7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_03_Text.unity
     guid: fce7ee241137911429a6cbd8d773b9e4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_10_Organization.unity
     guid: 8286825232b93f44b920421e3d73a8ce
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_11_Prefabs.unity
     guid: d63a1a7309bfe3e4884da8ead2f1255a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_02_Phrase.unity
     guid: 2699b1692ac37e943a9635c3ed63a2db
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_07_Token__Formatted_Text_.unity
     guid: f27adad5c60595040b726ef6c1122b96
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_05_Image.unity
     guid: b0bfdaf81b407ca4e99cd2239bdff5d9
+  - enabled: 0
+    path: Assets/Scenes/SceneForYandexViews.unity
+    guid: 1f64af1931fb676469e4dcbcf02bfebc
   m_configObjects: {}

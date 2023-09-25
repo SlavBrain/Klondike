@@ -75,6 +75,7 @@ public abstract class CardPlaceView : MonoBehaviour
     {
         _cardTransferController.AddTransfer(cardModel,newCardPlaceModel);
         _cards.Remove(cardModel.View);
+        Refresh();
     }
 
     private void OnModelReset()
