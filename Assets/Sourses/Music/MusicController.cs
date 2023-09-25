@@ -32,7 +32,7 @@ public class MusicController : MonoBehaviour
     public void Mute() => _audioSource.Pause();
     public void UnMute() => _audioSource.UnPause();
     
-    private void SetMusicOn(bool isOn)=>_audioSource.mute = !isOn;
+    public void SetMusicOn(bool isOn)=>_audioSource.mute = !isOn;
 
     private void SetMusicClip()
     {

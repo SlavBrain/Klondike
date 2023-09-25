@@ -55,6 +55,12 @@ public class Saver : MonoBehaviour
         SaveData.IsSoundOn = value;
         Save();
     }
+    
+    public void SaveMusicMute(bool value)
+    {
+        SaveData.IsMusicOn = value;
+        Save();
+    }
 
     public void Save()
     {
