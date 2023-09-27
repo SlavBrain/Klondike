@@ -885,7 +885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &234067564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,7 +898,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51eae58568c42574dbce2022cc4e6787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _muteChanger: {fileID: 2109650599}
+  _soundMuteChanger: {fileID: 2109650599}
+  _musicMuteChanger: {fileID: 1412419028}
 --- !u!114 &234067565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5099,7 +5100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806f0696300aeac44a0e17efee222854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLanguage: English
+  currentLanguage: Russian
   detectLanguage: 2
   defaultLanguage: 
   saveLoad: 1
@@ -7298,7 +7299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: "\u0418\u0433\u0440\u0430\u0442\u044C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}
   m_sharedMaterial: {fileID: -918141074304758902, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}
@@ -7325,7 +7326,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 135
+  m_fontSize: 100.85
   m_fontSizeBase: 91.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
