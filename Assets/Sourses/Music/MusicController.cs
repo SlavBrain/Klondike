@@ -29,9 +29,18 @@ public class MusicController : MonoBehaviour
         }
     }
     
-    public void Mute() => _audioSource.mute=true;
-    public void UnMute() => _audioSource.mute=false;
-    
+    public void Mute()
+    {
+        _audioSource.mute = true;
+        _audioSource.volume = 0;
+    }
+
+    public void UnMute()
+    {
+        _audioSource.mute = false;
+        _audioSource.volume = 1;
+    }
+
     public void SetMusicOn(bool isOn)=>_audioSource.mute = !isOn;
 
     private void SetMusicClip()

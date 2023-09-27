@@ -10,6 +10,8 @@ public class WebBackgroundMute : MonoBehaviour
     {
 #if!UNITY_WEBGL||UNITY_EDITOR
         Destroy(this);
+#else 
+        DontDestroyOnLoad(gameObject);
 #endif
     }
 
