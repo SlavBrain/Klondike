@@ -100,7 +100,6 @@ public class CardView : MonoBehaviour
         
         transform.position = _newPosition;
         transform.SetParent(newParent.gameObject.transform);
-        Debug.Log(gameObject.name+" "+_newPosition+" "+ transform.position);
         cardPlaceView.OnTakedCard(this.Model);
     }
 

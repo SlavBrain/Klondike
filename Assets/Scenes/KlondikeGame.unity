@@ -8637,7 +8637,6 @@ MonoBehaviour:
   - {fileID: 105269926}
   - {fileID: 776454971}
   - {fileID: 1397853231}
-  _saver: {fileID: 0}
   _autoFiller: {fileID: 2051765200}
 --- !u!4 &1500511348
 Transform:

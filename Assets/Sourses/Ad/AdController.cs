@@ -58,8 +58,8 @@ public class AdController : MonoBehaviour
 
     private void OnAdEnded()
     {
-        if (SoundController.Instance != null) SoundController.Instance.UnMute();
-        if(MusicController.Instance!=null) MusicController.Instance.UnMute();
+        if (SoundController.Instance != null&&Saver.Instance.SaveData.IsSoundOn) SoundController.Instance.UnMute();
+        if(MusicController.Instance!=null&&Saver.Instance.SaveData.IsMusicOn) MusicController.Instance.UnMute();
         Time.timeScale = 1;
     }
     

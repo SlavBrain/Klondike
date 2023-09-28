@@ -31,21 +31,32 @@ public class MusicController : MonoBehaviour
     
     public void Mute()
     {
+        Debug.Log("mute");
         _audioSource.mute = true;
         _audioSource.volume = 0;
     }
 
     public void UnMute()
     {
+        Debug.Log("unmute");
         _audioSource.mute = false;
         _audioSource.volume = 1;
     }
 
-    public void SetMusicOn(bool isOn)=>_audioSource.mute = !isOn;
+    public void SetMusicOn(bool isOn)
+    {
+        if (isOn)
+        {
+            UnMute();
+        }
+        else
+        {
+            Mute();
+        };
+    }
 
     private void SetMusicClip()
     {
-        Debug.Log("set music clip "+(_audioSource.isPlaying == false) + " " + (_audioSource.mute == false));
         
         if (_music.Count == 0)
         {
@@ -70,10 +81,8 @@ public class MusicController : MonoBehaviour
         _audioSource.clip = _music[_currentMusicIndex];
         _audioSource.Play();
         _currentMusicIndex++;
-        Debug.Log("coroutine "+(_audioSource.isPlaying == false) + " " + (_audioSource.mute == false));
         
         yield return new WaitUntil(() => (_audioSource.isPlaying == false && _audioSource.mute == false));
-        Debug.Log("coroutine2 "+(_audioSource.isPlaying == false) + " " + (_audioSource.mute == false));
         
         SetMusicClip();
     }
