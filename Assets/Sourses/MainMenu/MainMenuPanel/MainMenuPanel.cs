@@ -1,24 +1,20 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Agava.YandexGames;
 using IJunior.TypedScenes;
 
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
     public class MainMenuPanel : MonoBehaviour
     {
         [SerializeField] private Button _playButton;
-        [SerializeField] private Button _settingButton;
-        [SerializeField] private Button _leaderboardButton;
-        [SerializeField] private Button _rewardButton;
         [SerializeField] private BetChanger _betChanger;
         [SerializeField] private TMP_Text _nicknameLabel;
         [SerializeField] private TMP_Text _playerWalletValueText;
         [SerializeField] private MessagePanel _notEnoughCoinsPanel;
-
-        [SerializeField] private LeaderboardView _leaderboardMenu;
-        [SerializeField] private SettingMenu _settingMenu;
-    
 
         public static MainMenuPanel Instance { get; private set; }
     
@@ -26,6 +22,7 @@ using UnityEngine.UI;
         {
             if (Instance == null)
             {
+                YandexInitialization();
                 transform.parent = null;
                 Instance = this;
                 _betChanger.Initialize();
@@ -75,22 +72,22 @@ using UnityEngine.UI;
 
         private void SetNicknameLabel()
         {
+            Debug.Log(GetNickname());
             _nicknameLabel.SetText(GetNickname());
         }
 
         private string GetNickname()
         {
-        
+            name= "Anonymous";
+            Debug.Log("getNickName ");
 #if UNITY_WEBGL && !UNITY_EDITOR
         PlayerAccount.GetProfileData((result) =>
         {
             string name = result.publicName;
+            Debug.Log("Name "+name);
             if (string.IsNullOrEmpty(name))
                 name = "Anonymous";
-
         });
-#else
-            name= "Anonymous";
 #endif
             return name;
         }
@@ -99,5 +96,15 @@ using UnityEngine.UI;
         {
             _playerWalletValueText.text = PlayerData.Instance.CoinValue.ToString();
         }
-    }
+        
+        private IEnumerator YandexInitialization()
+        {
+#if !UNITY_WEBGL || UNITY_EDITOR
+            yield break;
+#endif
+            yield return YandexGamesSdk.Initialize();
+            }
+        }
+        
+    
 

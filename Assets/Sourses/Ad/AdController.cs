@@ -24,7 +24,6 @@ public class AdController : MonoBehaviour
     public void ShowVideoAd(Action onRewardedCallback = null)
     {
 #if UNITY_WEBGL&&!UNITY_EDITOR
-        Debug.Log("ShowingVideoAd");
         VideoAd.Show(onRewardedCallback: onRewardedCallback,onOpenCallback:OnAdStarting,onCloseCallback:OnAdEnded);
 #else
         Debug.Log("ShowingVideoAd");
@@ -65,8 +64,8 @@ public class AdController : MonoBehaviour
     
     private void OnAdEnded(bool value)
     {
-        if (SoundController.Instance != null) SoundController.Instance.UnMute();
-        if(MusicController.Instance!=null) MusicController.Instance.UnMute();
+        if (SoundController.Instance != null&&Saver.Instance.SaveData.IsSoundOn) SoundController.Instance.UnMute();
+        if(MusicController.Instance!=null&&Saver.Instance.SaveData.IsMusicOn) MusicController.Instance.UnMute();
         Time.timeScale = 1;
     }
 }

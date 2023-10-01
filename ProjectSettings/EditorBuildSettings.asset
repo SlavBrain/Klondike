@@ -26,10 +26,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_13_Debug.unity
     guid: 7661b1757569c0a48b368d09cb4ce5ed
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_04_Change_Language.unity
     guid: 944e4b159c1959b43bd8a1c7a44753ee
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/CW/LeanLocalization/Examples/_01_Localization.unity
     guid: e86b2aa8fd0757144a4a9af79c24e5e9
   - enabled: 0

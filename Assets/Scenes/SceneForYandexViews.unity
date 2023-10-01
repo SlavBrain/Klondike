@@ -726,7 +726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &100198542
 Transform:
   m_ObjectHideFlags: 0
@@ -1332,7 +1332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &316998382
 Transform:
   m_ObjectHideFlags: 0
@@ -2024,7 +2024,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 110.9
+  m_fontSize: 46.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2888,7 +2888,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041F\u0438\u043A\u0441\u0435\u043B\u044C"
+  m_text: "\rPixel"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}
   m_sharedMaterial: {fileID: -918141074304758902, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}
@@ -3711,39 +3711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cb6a3d0bb48754b807475e169c0649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjects:
-  - {fileID: 991302602}
-  - {fileID: 112869844}
-  - {fileID: 493681062}
-  - {fileID: 697915838}
-  - {fileID: 1418539919}
-  - {fileID: 1530404526}
-  - {fileID: 0}
-  - {fileID: 740498512}
-  - {fileID: 2145403196}
-  - {fileID: 1776078025}
-  - {fileID: 0}
-  - {fileID: 1945142158}
-  - {fileID: 1728479963}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 1601776243}
-  - {fileID: 1577621453}
-  - {fileID: 1973174217}
-  - {fileID: 723676340}
-  - {fileID: 763731626}
-  - {fileID: 477554991}
-  - {fileID: 1897266858}
-  - {fileID: 857126653}
-  - {fileID: 196562624}
-  - {fileID: 1362597667}
-  - {fileID: 12082985}
-  - {fileID: 1650153542}
-  - {fileID: 1116936499}
-  - {fileID: 61496988}
-  - {fileID: 1096055485}
-  - {fileID: 543162629}
-  - {fileID: 1480800116}
 --- !u!1 &770046108
 GameObject:
   m_ObjectHideFlags: 0
@@ -5267,39 +5234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cb6a3d0bb48754b807475e169c0649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjects:
-  - {fileID: 81042434}
-  - {fileID: 922412151}
-  - {fileID: 524240280}
-  - {fileID: 488402865}
-  - {fileID: 1192145483}
-  - {fileID: 2040143577}
-  - {fileID: 770046109}
-  - {fileID: 2074361239}
-  - {fileID: 543410473}
-  - {fileID: 107628593}
-  - {fileID: 3851684}
-  - {fileID: 796822607}
-  - {fileID: 1629026044}
-  - {fileID: 1128838112}
-  - {fileID: 462852006}
-  - {fileID: 1054744265}
-  - {fileID: 1326301155}
-  - {fileID: 630174002}
-  - {fileID: 972260318}
-  - {fileID: 1429508818}
-  - {fileID: 159150737}
-  - {fileID: 1535700232}
-  - {fileID: 397373579}
-  - {fileID: 435731852}
-  - {fileID: 1387266757}
-  - {fileID: 877593757}
-  - {fileID: 740577210}
-  - {fileID: 2046189248}
-  - {fileID: 1557617097}
-  - {fileID: 1721752989}
-  - {fileID: 554598706}
-  - {fileID: 411541606}
 --- !u!1 &1353032677
 GameObject:
   m_ObjectHideFlags: 0
@@ -5358,7 +5292,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041F\u0430\u0441\u044C\u044F\u043D\u0441 \u041A\u043E\u0441\u044B\u043D\u043A\u0430"
+  m_text: "\rKlondike Solitaire"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}
   m_sharedMaterial: {fileID: -918141074304758902, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}
@@ -5385,7 +5319,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.25
+  m_fontSize: 44
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

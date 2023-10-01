@@ -35,9 +35,15 @@ public class WebBackgroundMute : MonoBehaviour
         }
         else
         {
-            SoundController.Instance.UnMute();
-            MusicController.Instance.UnMute();
+            if (Saver.Instance.SaveData.IsSoundOn)
+            {
+                SoundController.Instance.UnMute();
+            }
+
+            if (Saver.Instance.SaveData.IsMusicOn)
+            {
+                MusicController.Instance.UnMute();
+            }
         }
-        
     }
 }
