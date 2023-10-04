@@ -73,9 +73,7 @@ public class Saver : MonoBehaviour
 
     private void Load()
     {
-#if UNITY_WEBGL&& !UNITY_EDITOR
-        Debug.Log("Authorized -"+PlayerAccount.IsAuthorized+"; HasPersonalProfileDataPermission-"+PlayerAccount.HasPersonalProfileDataPermission);
-        Debug.Log("Loading");
+        #if UNITY_WEBGL&& !UNITY_EDITOR
         PlayerAccount.GetCloudSaveData(onSuccessCallback: OnLoaded);
 #else
         if (PlayerPrefs.HasKey("SaveData"))
@@ -96,7 +94,7 @@ public class Saver : MonoBehaviour
 
     private void OnLoaded(string jsonData)
     {
-        Debug.Log("OnLoading");
+        Debug.Log("OnLoaded");
         SaveData = JsonUtility.FromJson<SaveData>(jsonData);
         IsLoaded = true;
     }

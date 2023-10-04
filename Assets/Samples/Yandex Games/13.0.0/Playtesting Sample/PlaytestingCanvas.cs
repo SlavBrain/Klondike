@@ -45,7 +45,9 @@ namespace Agava.YandexGames.Samples
 
                 yield return new WaitForSecondsRealtime(0.25f);
             }
+            
         }
+        
 
         public void OnShowInterstitialButtonClick()
         {

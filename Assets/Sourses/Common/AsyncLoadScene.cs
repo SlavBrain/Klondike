@@ -44,16 +44,6 @@ public class AsyncLoadScene : MonoBehaviour
         {
             yield return YandexGamesSdk.Initialize(Init);
         }
-
-        public void Load(AsyncOperation operation)
-        {
-            Time.timeScale = 1f;
-            
-            if (_asyncLoadWork != null)
-                return;
-            
-            _asyncLoadWork = StartCoroutine(AsyncLoad(operation));
-        }
         
         private void Init()
         {
@@ -66,12 +56,14 @@ public class AsyncLoadScene : MonoBehaviour
             WaitForSecondsRealtime waitForSecondsRealtime = new WaitForSecondsRealtime(WaitForSeconds);
             _panel.Enable();
 
-            while (_progressValue <= _progressBar.maxValue || Saver.IsLoaded == false)
+            while (_progressValue < _progressBar.maxValue && Saver.IsLoaded == false)
             {
+                Debug.Log("saver isLoaded "+Saver.IsLoaded);
                 if (Saver.IsLoaded == false)
-                    _progressValue += Random.Range(0,FakeAddNotInitProgress);
+                    _progressValue += Random.Range(0, FakeAddNotInitProgress);
                 else
-                    _progressValue += Random.Range(0,FakeAddInitProgress);;
+                    _progressValue = _progressBar.maxValue;
+                    //_progressValue += Random.Range(0,FakeAddInitProgress);;
 
                 _progressBar.value = _progressValue;
 
@@ -80,20 +72,6 @@ public class AsyncLoadScene : MonoBehaviour
             SetDefaultValues();
 
             IJunior.TypedScenes.MainMenu.Load();
-        }
-
-        private IEnumerator AsyncLoad(AsyncOperation operation)
-        {
-            _panel.Enable();
-
-            while (operation.isDone == false)
-            {
-                _progressValue = operation.progress / MaxAsyncOperationValue;
-                _progressBar.value = _progressValue;
-                
-                yield return null;
-            }
-            SetDefaultValues();
         }
 
         private void SetDefaultValues()
