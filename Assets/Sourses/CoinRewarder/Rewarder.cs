@@ -14,13 +14,11 @@ public class Rewarder : MonoBehaviour
 
     public void OnVideoRewardButtonClick()
     {
-        Debug.Log("RewardButtonClick");
         AdController.Instance.ShowVideoAd(onRewardedCallback:GiveVideoReward);
     }
 
     private void GiveVideoReward()
     {
-        Debug.Log("GiveVideoReward");
         PlayerData.Instance.AddCoins(_videoReward);
     }
     

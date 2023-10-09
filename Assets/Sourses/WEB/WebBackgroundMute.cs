@@ -27,7 +27,6 @@ public class WebBackgroundMute : MonoBehaviour
 
     private void OnInBackgroundChange(bool isBackground)
     {
-        Debug.Log("onBackground");
         if (isBackground)
         {
             SoundController.Instance.Mute();
