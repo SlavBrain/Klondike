@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AdController : MonoBehaviour
 {
+    public bool IsAdShowing { get; private set; }
     public static AdController Instance;
 
     public void Initialize()
@@ -50,6 +51,7 @@ public class AdController : MonoBehaviour
 
     private void OnAdStarting()
     {
+        IsAdShowing = true;
         if (SoundController.Instance != null) SoundController.Instance.Mute();
         if(MusicController.Instance!=null) MusicController.Instance.Mute();
         Time.timeScale = 0;
@@ -60,6 +62,7 @@ public class AdController : MonoBehaviour
         if (SoundController.Instance != null&&Saver.Instance.SaveData.IsSoundOn) SoundController.Instance.UnMute();
         if(MusicController.Instance!=null&&Saver.Instance.SaveData.IsMusicOn) MusicController.Instance.UnMute();
         Time.timeScale = 1;
+        IsAdShowing = false;
     }
     
     private void OnAdEnded(bool value)
@@ -67,5 +70,6 @@ public class AdController : MonoBehaviour
         if (SoundController.Instance != null&&Saver.Instance.SaveData.IsSoundOn) SoundController.Instance.UnMute();
         if(MusicController.Instance!=null&&Saver.Instance.SaveData.IsMusicOn) MusicController.Instance.UnMute();
         Time.timeScale = 1;
+        IsAdShowing = false;
     }
 }

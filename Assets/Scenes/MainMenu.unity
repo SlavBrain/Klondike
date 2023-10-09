@@ -394,7 +394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 2014838457, guid: 2da2a2651cec4e2459ee973c854f5e88, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5
 --- !u!222 &21963411
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2428,7 +2428,7 @@ RectTransform:
   m_Father: {fileID: 805577802}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.19000001, y: 0.7951525}
+  m_AnchorMin: {x: 0.18974887, y: 0.7328479}
   m_AnchorMax: {x: 0.80500007, y: 0.8796099}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -2453,7 +2453,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0417\u0430\u043F\u0440\u043E\u0441 \u0430\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u0438"
+  m_text: "\u0414\u043B\u044F \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430
+    \u043B\u0438\u0434\u0435\u0440\u0431\u043E\u0440\u0434\u0430 \u043D\u0443\u0436\u043D\u043E
+    \u0430\u0432\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}
   m_sharedMaterial: {fileID: -918141074304758902, guid: 8713935763a0aea4f81e0dea82017a04, type: 2}
@@ -2480,7 +2482,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.95
+  m_fontSize: 39.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2724,7 +2726,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 2014838457, guid: 2da2a2651cec4e2459ee973c854f5e88, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2733,7 +2735,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5
 --- !u!222 &726595426
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4810,7 +4812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1245925652
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5177,13 +5179,16 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: Russian
-    Text: "\u0417\u0430\u043F\u0440\u043E\u0441 \u0430\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u0438"
+    Text: "\u0414\u043B\u044F \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430
+      \u043B\u0438\u0434\u0435\u0440\u0431\u043E\u0440\u0434\u0430 \u043D\u0443\u0436\u043D\u043E
+      \u0430\u0432\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
     Object: {fileID: 0}
   - Language: English
-    Text: Authorization require
+    Text: To view the leaderboard, you need to log in
     Object: {fileID: 0}
   - Language: Turkish
-    Text: Yetkilendirme gerekli
+    Text: "Lider tahtay\u0131 g\xF6r\xFCnt\xFClemek i\xE7in giri\u015F yapman\u0131z
+      gerekir"
     Object: {fileID: 0}
 --- !u!1 &1353942193
 GameObject:
