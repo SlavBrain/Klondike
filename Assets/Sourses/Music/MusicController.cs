@@ -57,7 +57,7 @@ public class MusicController : MonoBehaviour
 
     private void SetMusicClip()
     {
-        
+        Debug.Log("SetMusic");
         if (_music.Count == 0)
         {
             return;
@@ -80,6 +80,7 @@ public class MusicController : MonoBehaviour
     {
         _audioSource.clip = _music[_currentMusicIndex];
         _audioSource.Play();
+        Debug.Log("PlayMusic");
         _currentMusicIndex++;
         
         yield return new WaitUntil(() => (_audioSource.isPlaying == false && _audioSource.mute == false));

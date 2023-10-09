@@ -25,7 +25,7 @@ public class LeaderboardView : MonoBehaviour
 
         if (Instance == null)
         {
-            transform.parent = null;
+            transform.SetParent(null);
             Instance = this;
             
             Disable();

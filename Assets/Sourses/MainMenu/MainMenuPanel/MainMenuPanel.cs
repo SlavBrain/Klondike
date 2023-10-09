@@ -16,6 +16,7 @@ using UnityEngine.UI;
         [SerializeField] private TMP_Text _playerWalletValueText;
         [SerializeField] private MessagePanel _notEnoughCoinsPanel;
 
+        private PlayerAccountProfileDataResponse _playerAccountProfileDataResponse;
         public static MainMenuPanel Instance { get; private set; }
     
         public void Initialize()
@@ -23,7 +24,7 @@ using UnityEngine.UI;
             if (Instance == null)
             {
                 YandexInitialization();
-                transform.parent = null;
+                transform.SetParent(null);
                 Instance = this;
                 _betChanger.Initialize();
             }
@@ -37,8 +38,15 @@ using UnityEngine.UI;
         {
             _playButton.onClick.AddListener(OnPlayButtonClick);
             PlayerData.Instance.ChangedValue += SetWalletValueText;
-            SetWalletValueText();
-            SetNicknameLabel();
+            if (YandexGamesSdk.IsInitialized)
+            {
+                SetWalletValueText();
+                UpdateProfileData();
+            }
+            else
+            {
+                YandexInitialization();
+            }
         }
 
         private void OnDisable()
@@ -70,26 +78,23 @@ using UnityEngine.UI;
             }
         }
 
-        private void SetNicknameLabel()
+        private void SetUserData()
         {
-            Debug.Log(GetNickname());
-            _nicknameLabel.SetText(GetNickname());
+            UpdateProfileData();
+            SetWalletValueText();
         }
 
-        private string GetNickname()
+        private void UpdateProfileData()
         {
-            name= "Anonymous";
-            Debug.Log("getNickName ");
-#if UNITY_WEBGL && !UNITY_EDITOR
-        PlayerAccount.GetProfileData((result) =>
+            StartCoroutine(PlayerAccountProfileDataResponseLoading());
+        }
+
+        private void SetNickname(string nickname=null)
         {
-            string name = result.publicName;
-            Debug.Log("Name "+name);
             if (string.IsNullOrEmpty(name))
-                name = "Anonymous";
-        });
-#endif
-            return name;
+                _nicknameLabel.SetText("Anonymous");
+            else
+                _nicknameLabel.SetText(nickname);
         }
 
         private void SetWalletValueText()
@@ -99,12 +104,36 @@ using UnityEngine.UI;
         
         private IEnumerator YandexInitialization()
         {
-#if !UNITY_WEBGL || UNITY_EDITOR
+#if UNITY_WEBGL &&!UNITY_EDITOR
+            yield return YandexGamesSdk.Initialize(SetUserData);
+#else
             yield break;
 #endif
-            yield return YandexGamesSdk.Initialize();
-            }
         }
+
+        private IEnumerator PlayerAccountProfileDataResponseLoading()
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            bool isReceived = false;
+            WaitForSeconds delay = new WaitForSeconds(1);
+            
+            while (!isReceived)
+            {
+                PlayerAccount.GetProfileData(result =>
+                {
+                    SetNickname(result.publicName);
+                    isReceived = true;
+                });
+                
+                yield return delay;
+            }
+            
+#else
+            SetNickname("Anonymous");
+            yield break;
+#endif
+        }
+    }
         
     
 
