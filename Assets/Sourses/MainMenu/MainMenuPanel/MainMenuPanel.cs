@@ -91,7 +91,7 @@ using UnityEngine.UI;
 
         private void SetNickname(string nickname=null)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(nickname))
                 _nicknameLabel.SetText("Anonymous");
             else
                 _nicknameLabel.SetText(nickname);
